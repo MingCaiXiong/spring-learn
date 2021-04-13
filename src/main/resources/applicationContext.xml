@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sweetApple" class="top.xiongmingcai.ioc.entity.Apple">
+        <property name="title" value="红富士"/>
+        <property name="origin" value="美国"/>
+        <property name="color" value="红色"/>
+    </bean>
+    <bean id="sourApple" class="top.xiongmingcai.ioc.entity.Apple">
+        <property name="title" value="青苹果"/>
+        <property name="origin" value="中亚"/>
+        <property name="color" value="绿色"/>
+    </bean>
+    <bean id="softApple" class="top.xiongmingcai.ioc.entity.Apple">
+        <property name="title" value="金帅"/>
+        <property name="origin" value="中国"/>
+        <property name="color" value="金色"/>
+    </bean>
+
+    <bean id="lily" class="top.xiongmingcai.ioc.entity.Child">
+        <property name="name" value="莉莉"/>
+        <property name="apple" ref="sweetApple"/>
+    </bean>
+
+    <bean id="andy" class="top.xiongmingcai.ioc.entity.Child">
+        <property name="name" value="安迪"/>
+        <property name="apple" ref="softApple"/>
+    </bean>
+
+
+    <bean id="luna" class="top.xiongmingcai.ioc.entity.Child">
+        <property name="name" value="露娜"/>
+        <property name="apple" ref="sourApple"/>
+    </bean>
+
+    <bean id="cat" class="top.xiongmingcai.ioc.entity.Cat">
+        <property name="username" value="喵喵"/>
+        <property name="age" value="2"/>
+    </bean>
+
+    <bean id="dog" class="top.xiongmingcai.ioc.entity.Dog">
+        <property name="username" value="喵喵"/>
+        <property name="age" value="9"/>
+    </bean>
+
+    <bean id="连衣裙" class="top.xiongmingcai.ioc.entity.Clothes">
+        <property name="style" value="连衣裙"/>
+        <property name="color" value="红色"/>
+
+    </bean>
+
+    <bean id="西装" class="top.xiongmingcai.ioc.entity.Clothes">
+        <property name="style" value="西装"/>
+        <property name="color" value="蓝色"/>
+
+    </bean>
+
+    <bean id="girl" class="top.xiongmingcai.ioc.entity.Person">
+        <property name="name" value="女孩"/>
+        <property name="clothes" ref="连衣裙"/>
+    </bean>
+
+    <bean id="boy" class="top.xiongmingcai.ioc.entity.Person">
+        <property name="name" value="男孩"/>
+        <property name="clothes" ref="西装"/>
+    </bean>
+
+
+
+
+</beans>
