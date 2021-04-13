@@ -1,14 +1,14 @@
-package top.xiongmingcai.ioc.entity;
-
 public class Apple {
-    String title;
-    String color;
-    String origin;
+    private String title;
+    private String color;
+    private String origin;
 
     public Apple() {
+        System.out.println("通过无参构建方法构建对象");
     }
 
     public Apple(String title, String color, String origin) {
+        System.out.println("--------通过带参构建方法构建对象----");
         this.title = title;
         this.color = color;
         this.origin = origin;
