@@ -11,6 +11,7 @@ public class SchoolBag {
     private List<Pen> pencilCase;
 
     public SchoolBag() {
+        System.out.println("默认构造方法: " + this);
     }
 
     public SchoolBag(String color, List<Pen> pencilCase) {
