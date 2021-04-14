@@ -3,13 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="one" class="Apple">
 
-    </bean>
 
-    <bean id="apple2" class="Apple">
-        <constructor-arg name="title" value="红富士"/>
-        <constructor-arg name="color" value="红色"/>
-        <constructor-arg name="origin" value="美国"/>
-    </bean>
+    <bean id="apple3" class="factory.AppleStaticFactory" factory-method="createSweetApple"/>
 </beans>
