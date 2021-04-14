@@ -5,7 +5,7 @@
 
 
     <!--静态工厂通过静态方法创建对象,隐藏创建对象的细节-->
-    <bean id="apple3" class="factory.AppleStaticFactory" factory-method="createSweetApple"/>
+    <bean name="apple2, apple, apple3 " class="factory.AppleStaticFactory" factory-method="createSweetApple"/>
 <!--    工厂实例方法创建对象是指IOC容器对工厂类进行实例化并调用对应的实例方法创建对象的过程-->
     <bean id="factoryInstance" class="factory.AppleFactoryInstance" />
     <bean id="instance" factory-bean="factoryInstance" factory-method="createSweetApple"/>
