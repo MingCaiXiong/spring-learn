@@ -10,12 +10,11 @@ public class SpringApplication {
 //        Apple sweeApple = context.getBean("sweetApple", Apple.class);
 //        Apple sourApple = context.getBean("sourApple", Apple.class);
 //        Apple softApple = context.getBean("softApple", Apple.class);
-        Child lily = context.getBean("lily", Child.class);
+//        Child lily = context.getBean("lily", Child.class);
         Child andy = context.getBean("andy", Child.class);
-        Child luna = context.getBean("luna", Child.class);
-        lily.eat();
+//        Child luna = context.getBean("luna", Child.class);
         andy.eat();
-        luna.eat();
+
 
 
     }

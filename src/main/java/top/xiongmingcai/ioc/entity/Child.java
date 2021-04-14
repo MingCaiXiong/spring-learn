@@ -8,6 +8,7 @@ public class Child {
     }
 
     public Child(String name, Apple apple) {
+        System.out.println("构造方法:"+apple);
         this.name = name;
         this.apple = apple;
     }

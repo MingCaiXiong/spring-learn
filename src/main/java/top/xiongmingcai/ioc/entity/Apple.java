@@ -6,9 +6,11 @@ public class Apple {
     String origin;
 
     public Apple() {
+        System.out.println(" 无参<-- "+this);
     }
 
     public Apple(String title, String color, String origin) {
+        System.out.println(" -->有参"+this);
         this.title = title;
         this.color = color;
         this.origin = origin;
@@ -36,5 +38,14 @@ public class Apple {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "title='" + title + '\'' +
+                ", color='" + color + '\'' +
+                ", origin='" + origin + '\'' +
+                '}';
     }
 }
