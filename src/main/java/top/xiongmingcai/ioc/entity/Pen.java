@@ -6,6 +6,7 @@ public class Pen {
     private Float price;
 
     public Pen() {
+        System.out.println("默认构造方法: " + this);
     }
 
     public Pen(String name) {

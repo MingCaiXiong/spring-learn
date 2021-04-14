@@ -3,49 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean name="bag" class="top.xiongmingcai.ioc.entity.SchoolBag">
-      <property name="color" value="军绿色"/>
-      <property name="pencilCase">
-          <bean class="top.xiongmingcai.ioc.entity.Pen">
-               <property name="name" value="铅笔"/>
-               <property name="price" value=".5"/>
-          </bean>
-      </property>
-  </bean>
-
-
-
-  <bean name="tow" class="top.xiongmingcai.ioc.entity.SchoolBag">
-      <property name="color" value="黑色背包"/>
-      <property name="pencilCase">
-        <list>
-            <ref bean="pen"/>
-            <ref bean="mao"/>
-            <bean class="top.xiongmingcai.ioc.entity.Pen">
-                <property name="name" value="鸡毛"/>
-                <property name="price" value=".3"/>
-            </bean>
-            <bean class="top.xiongmingcai.ioc.entity.Pen">
-                <constructor-arg name="name" value="彩笔"/>
-            </bean>
-            <value > 圆珠笔</value>
-        </list>
-      </property>
-  </bean>
-
-
-
-
-
-
-
-
-
-    <bean id="pen" class="top.xiongmingcai.ioc.entity.Pen">
-        <constructor-arg name="name" value="铅笔"/>
-    </bean>
-
-    <bean id="mao" class="top.xiongmingcai.ioc.entity.Pen">
+    <bean id="mao" class="top.xiongmingcai.ioc.entity.Pen" scope="prototype">
         <property name="name" value="毛笔"/>
         <property name="price" value="3.5"/>
     </bean>
