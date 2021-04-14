@@ -3,15 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<bean id="a1" class="top.xiongmingcai.ioc.entity.A">
-
-</bean>
-<bean id="b1" class="top.xiongmingcai.ioc.entity.B" scope="prototype">
-    <property name="a" ref="a1"/>
-</bean>
-
-<bean id="c1" class="top.xiongmingcai.ioc.entity.C">
-    <property name="b" ref="b1"/>
-</bean>
+    <bean id="order1" class="top.xiongmingcai.ioc.entity.Order"
+          init-method="init" destroy-method="destroy">
+        <property name="price" value="19.8"/>
+        <property name="quantity" value="1000"/>
+    </bean>
 
 </beans>
