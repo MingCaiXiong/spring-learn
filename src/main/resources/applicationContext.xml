@@ -19,4 +19,19 @@
     <bean class="top.xiongmingcai.aop.service.EmployeeService" id="employeeService">
         <property name="employeeDao" ref="employeeDao"/>
     </bean>
+
+    <!--Aop配置-->
+    <bean class="top.xiongmingcai.aop.aspect.MethodAspect" id="methodAspect"/>
+    <aop:config>
+        <!--定义切点，使用execution表达式表示切面的拦截范围-->
+        <!--execution(public * com.imooc..*.*(..))说明切面的作用com.imooc包下所有类的所有方法-->
+        <aop:pointcut id="pointcut" expression="execution(public * top.xiongmingcai..*.*(..))"/>
+        <!--定义切面类，刚才的bean只是告诉ioc容器这是一个对象，但是具体声明为切面类还需要再
+        在aop:config中配置-->
+        <aop:aspect ref="methodAspect">
+            <!--before通知，代表在目标方法运行前运行methodAspect.printExecutionTime方法-->
+            <aop:before method="printExecutionTime" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
 </beans>
