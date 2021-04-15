@@ -1,6 +1,7 @@
 package top.xiongmingcai.ioc.service;
 
 
+import top.xiongmingcai.ioc.dao.EmployeeDao;
 import top.xiongmingcai.ioc.dao.UserDao;
 
 /**
@@ -12,6 +13,7 @@ import top.xiongmingcai.ioc.dao.UserDao;
 public class UserService {
 
     private UserDao userDao;
+    private EmployeeDao employeeDao;
 
     public UserDao getUserDao() {
         return userDao;
@@ -21,4 +23,11 @@ public class UserService {
         this.userDao = userDao;
     }
 
+    public EmployeeDao getEmployeeDao() {
+        return employeeDao;
+    }
+
+    public void setEmployeeDao(EmployeeDao employeeDao) {
+        this.employeeDao = employeeDao;
+    }
 }
