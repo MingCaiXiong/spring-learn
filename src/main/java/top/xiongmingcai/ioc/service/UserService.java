@@ -1,13 +1,7 @@
 package top.xiongmingcai.ioc.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import top.xiongmingcai.ioc.dao.IUserDao;
-
-import javax.annotation.Resource;
+import top.xiongmingcai.ioc.dao.UserDao;
 
 /**
  * (User)表服务接口
@@ -15,44 +9,16 @@ import javax.annotation.Resource;
  * @author makejava
  * @since 2021-04-15 08:36:56
  */
-@Service
 public class UserService {
-    @Value("${metaData}")
-    private String MetaDate;
-    @Value("${mysql.password}")
-    private String password;
-    //spring ioc 容器会自动通过反射技术将属性private修饰符自动改为public,直接进行赋值
-    @Qualifier("userDao")
-//    @Autowired//不在执行set方法
-//    @Resource(name = "userDao")
-    @Resource
-    private IUserDao dao;
 
-    public void setDao(IUserDao dao) {
-        this.dao = dao;
+    private UserDao userDao;
+
+    public UserDao getUserDao() {
+        return userDao;
     }
 
-    public UserService() {
-        System.out.println("UserService.UserService" + this);
-    }
-
-    public IUserDao getUdao() {
-        return dao;
-    }
-
-    public void setUdao(IUserDao udao) {
-        this.dao = udao;
-    }
-
-    @Autowired
-    public  void  show(){
-        System.out.println("userOraclDao = " + dao);
-        System.out.println("MetaDate = " + MetaDate);
-
-    }
-    @Autowired
-    public void init(){
-        System.out.println("password = " + password);
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 
 }
