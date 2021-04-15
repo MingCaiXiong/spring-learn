@@ -7,4 +7,10 @@ public class UserDao implements IUserDao{
     public UserDao() {
         System.out.println("UserDao.UserDao"+this);
     }
+
+
+    @Override
+    public void joinDepartment() {
+
+    }
 }

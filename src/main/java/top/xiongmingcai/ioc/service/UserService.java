@@ -1,11 +1,11 @@
 package top.xiongmingcai.ioc.service;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import top.xiongmingcai.ioc.dao.IUserDao;
-import top.xiongmingcai.ioc.dao.UserDao;
+
+import javax.annotation.Resource;
 
 /**
  * (User)表服务接口
@@ -17,18 +17,28 @@ import top.xiongmingcai.ioc.dao.UserDao;
 public class UserService {
     //spring ioc 容器会自动通过反射技术将属性private修饰符自动改为public,直接进行赋值
 //    @Qualifier("userDao")
-    @Autowired//不在执行set方法
-    private IUserDao udao;
+//    @Autowired//不在执行set方法
+//    @Resource(name = "userDao")
+    @Resource
+    private IUserDao dao;
+
+    public void setDao(IUserDao dao) {
+        this.dao = dao;
+    }
 
     public UserService() {
         System.out.println("UserService.UserService" + this);
     }
 
     public IUserDao getUdao() {
-        return udao;
+        return dao;
     }
 
     public void setUdao(IUserDao udao) {
-        this.udao = udao;
+        this.dao = udao;
+    }
+
+    public  void  show(){
+        System.out.println("userOraclDao = " + dao);
     }
 }
