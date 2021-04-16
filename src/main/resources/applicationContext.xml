@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -19,15 +20,18 @@
 <!--    <bean class="top.xiongmingcai.aop.service.EmployeeService" id="employeeService">-->
 <!--        <property name="employeeDao" ref="employeeDao"/>-->
 <!--    </bean>-->
-    <bean class="top.xiongmingcai.aop.service.BookShop" id="bookShop"/>
+<!--    <bean class="top.xiongmingcai.aop.service.BookShop" id="bookShop"/>-->
 
-    <!--Aop配置-->
-    <bean class="top.xiongmingcai.aop.aspect.MethodPro" id="methodPro"/>
-    <aop:config>
-        <aop:pointcut id="pointcut" expression="execution( * top.xiongmingcai..*.*(..))"/>
-        <aop:aspect ref="methodPro" >
-            <aop:around method="welcome" pointcut-ref="pointcut"/>
-        </aop:aspect>
-    </aop:config>
+<!--    &lt;!&ndash;Aop配置&ndash;&gt;-->
+<!--    <bean class="top.xiongmingcai.aop.aspect.MethodPro" id="methodPro"/>-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pointcut" expression="execution( * top.xiongmingcai..*.*(..))"/>-->
+<!--        <aop:aspect ref="methodPro" >-->
+<!--            <aop:around method="welcome" pointcut-ref="pointcut"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <context:component-scan base-package="top.xiongmingcai"/>
+    <aop:aspectj-autoproxy/>
 
 </beans>
