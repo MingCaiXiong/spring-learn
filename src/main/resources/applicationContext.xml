@@ -31,9 +31,10 @@
         <aop:aspect ref="methodAspect">
             <!--before通知，代表在目标方法运行前运行methodAspect.printExecutionTime方法-->
             <aop:before method="printExecutionTime" pointcut-ref="pointcut"/>
-            <aop:after method="doAfter" pointcut-ref="pointcut"/>
+<!--            <aop:after method="doAfter" pointcut-ref="pointcut"/>-->
             <aop:after-returning method="doAfterReturning" pointcut-ref="pointcut" returning="ret"/>
-            <aop:after-throwing method="doAfterThrowing" pointcut-ref="pointcut" throwing="th"/>
+            <aop:after method="doAfter" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="doAfterThrowing" throwing="th" pointcut-ref="pointcut"/>
         </aop:aspect>
     </aop:config>
 
