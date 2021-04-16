@@ -27,5 +27,7 @@ public class MethodAspect {
     public void doAfter(JoinPoint joinPoint) {
         System.out.println("<----MethodAspect.doAfter");
     }
-
+    public void doAfterReturning(JoinPoint joinPoint ,Object ret){
+        System.out.println("返回后通知 <---" + ret);
+    }
 }
