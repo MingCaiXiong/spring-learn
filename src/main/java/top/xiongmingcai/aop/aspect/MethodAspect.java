@@ -24,4 +24,8 @@ public class MethodAspect {
             System.out.println("--->参数 : " + arg);
         }
     }
+    public void doAfter(JoinPoint joinPoint) {
+        System.out.println("<----MethodAspect.doAfter");
+    }
+
 }
