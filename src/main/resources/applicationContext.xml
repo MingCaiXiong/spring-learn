@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -9,24 +10,15 @@
         http://www.springframework.org/schema/aop
         https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean class="top.xiongmingcai.aop.dao.UserDao" id="userDao"/>
-    <bean class="top.xiongmingcai.aop.dao.EmployeeDao" id="employeeDao"/>
 
-    <bean class="top.xiongmingcai.aop.service.UserService" id="userService">
-        <property name="userDao" ref="userDao"/>
-    </bean>
+    <!--在IoC容器初始化时自动扫面四种组件类型注解并完成实例化
+       @Controller  当前mcv 控制类
+       @Repository  业务类 dao层  持久层
+       @Service  服务类
+       @Component  可以控制所有  不然确定的时候使用它就得了
+       -->
+    <context:component-scan  base-package="top.xiongmingcai"/><!--定义扫描注解作用范围-->
 
-    <bean class="top.xiongmingcai.aop.service.EmployeeService" id="employeeService">
-        <property name="employeeDao" ref="employeeDao"/>
-    </bean>
-
-    <!--Aop配置-->
-    <bean class="top.xiongmingcai.aop.aspect.MethodChecker" id="methodChecker"/>
-    <aop:config>
-        <aop:pointcut id="pointcut" expression="execution( * top.xiongmingcai..*.*(..))"/>
-        <aop:aspect ref="methodChecker" >
-            <aop:around method="check" pointcut-ref="pointcut"/>
-        </aop:aspect>
-    </aop:config>
-
+    <!--启动AOP注解模式-->
+    <aop:aspectj-autoproxy/>
 </beans>

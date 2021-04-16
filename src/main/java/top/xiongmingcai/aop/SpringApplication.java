@@ -9,6 +9,7 @@ public class SpringApplication {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        context =context;
         UserService userService = context.getBean("userService", UserService.class);
         EmployeeService employeeService = context.getBean("employeeService", EmployeeService.class);
         employeeService.onBoarding();

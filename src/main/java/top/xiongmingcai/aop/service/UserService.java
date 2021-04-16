@@ -1,8 +1,13 @@
 package top.xiongmingcai.aop.service;
 
+import org.springframework.stereotype.Service;
 import top.xiongmingcai.aop.dao.UserDao;
 
+import javax.annotation.Resource;
+
+@Service
 public class UserService {
+    @Resource
     private UserDao userDao;
 
     public  void createUser(){
