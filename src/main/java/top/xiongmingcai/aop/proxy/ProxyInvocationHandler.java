@@ -1,7 +1,8 @@
 package top.xiongmingcai.aop.proxy;
 
-import javafx.concurrent.Task;
+import top.xiongmingcai.aop.service.EmployeeService;
 import top.xiongmingcai.aop.service.UserService;
+import top.xiongmingcai.aop.service.impl.EmployeeServiceImpl;
 import top.xiongmingcai.aop.service.impl.UserServiceImpl;
 
 import java.lang.reflect.InvocationHandler;
@@ -41,6 +42,11 @@ public class ProxyInvocationHandler implements InvocationHandler {
         //动态创建代理类
         UserService userServiceProxy = (UserService)Proxy.newProxyInstance(userService.getClass().getClassLoader(), userService.getClass().getInterfaces(), invocationHandler);
         userServiceProxy.createUser();
+
+        //动态代理,必须实现接口才可以运行(强制要求)
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        EmployeeService employeeServiceProxy = (EmployeeService) Proxy.newProxyInstance(employeeService.getClass().getClassLoader(), employeeService.getClass().getInterfaces(), new ProxyInvocationHandler(employeeService));
+        employeeServiceProxy.createEmployee();
     }
 
 }
