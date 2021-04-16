@@ -25,7 +25,7 @@
     <aop:config>
         <!--定义切点，使用execution表达式表示切面的拦截范围-->
         <!--execution(public * com.imooc..*.*(..))说明切面的作用com.imooc包下所有类的所有方法-->
-        <aop:pointcut id="pointcut" expression="execution(public * top.xiongmingcai..*.*(..))"/>
+        <aop:pointcut id="pointcut" expression="execution( * top.xiongmingcai..Em*.onBoa*(..))"/>
         <!--定义切面类，刚才的bean只是告诉ioc容器这是一个对象，但是具体声明为切面类还需要再
         在aop:config中配置-->
         <aop:aspect ref="methodAspect">
