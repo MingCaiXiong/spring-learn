@@ -11,7 +11,7 @@ public class UserService {
     }
 
     public String validationPassword(String type, Integer length){
-        System.out.println("效验密码");
+        System.out.println("使用"+type + "加密" + "长度为:"+length);
         return "sdafdsaf";
     }
 

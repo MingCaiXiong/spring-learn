@@ -10,5 +10,6 @@ public class SpringApplication {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         UserService userService = context.getBean("userService", UserService.class);
         userService.createUser();
+        userService.validationPassword("MD5" , 16);
     }
 }
