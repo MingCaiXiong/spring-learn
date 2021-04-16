@@ -21,6 +21,12 @@
     </bean>
 
     <!--Aop配置-->
-
+    <bean class="top.xiongmingcai.aop.aspect.MethodChecker" id="methodChecker"/>
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution( * top.xiongmingcai..*.*(..))"/>
+        <aop:aspect ref="methodChecker" >
+            <aop:around method="check" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>
