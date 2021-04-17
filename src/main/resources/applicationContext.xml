@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--数据源-->
     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
@@ -20,4 +28,30 @@
     <bean class="top.xiongmingcai.jdbc.dao.EmployeeDao" id="employeeDao">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
+
+    <bean class="top.xiongmingcai.jdbc.service.EmployeeService" id="employeeService">
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
+    <!--事务管理器:用于创建事务/提交/回滚-->
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--事务通知配置，决定哪些方法使用事务，哪些不使用-->
+    <tx:advice transaction-manager="transactionManager" id="txAdvice">
+        <tx:attributes>
+            <!--目标方法名为batchAdd时，启动声明式事务，成功提交，运行异常时回滚-->
+            <tx:method name="batchAdd" propagation="REQUIRED"/>
+            <!--设置不使用事务-->
+            <tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true"/>
+            <tx:method name="get*" propagation="NOT_SUPPORTED" read-only="true"/>
+            <!--其他情况-->
+            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--定义声明式事务的作用范围-->
+    <aop:config>
+        <aop:pointcut id="pointcut"  expression="execution(public * top.xiongmingcai..*Service.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+    </aop:config>
 </beans>
