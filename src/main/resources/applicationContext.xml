@@ -20,4 +20,8 @@
     <bean class="top.xiongmingcai.jdbc.dao.EmployeeDao" id="employeeDao">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
+
+    <bean class="top.xiongmingcai.jdbc.dao.HotelDao" id="hotelDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
 </beans>
