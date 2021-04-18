@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import top.xiongmingcai.springmvc.entity.User;
 
 @Controller
+// @RequestMapping(produces = "text/plain;charset=UTF-8")
 // @RequestMapping(value="/g",method = RequestMethod.GET)
 public class URLMappingCaontroller {
   @GetMapping("/g")
@@ -33,6 +34,10 @@ public class URLMappingCaontroller {
   @GetMapping("/user")
   @ResponseBody
   public String login(User user) {
-    return user.getToken() + user.getPassword();
+    return "  <meta charset=\"UTF-8\"><fieldset><legend>登陆成功</legend>用户名："
+        + user.getToken()
+        + "<br>密码："
+        + user.getPassword()
+        + "</fieldset>";
   }
 }

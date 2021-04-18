@@ -4,21 +4,49 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <base href="http://localhost:8080">
+    <style>
+
+        .form-ctl {
+            width: 30%;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+        }
+
+        .form-box {
+            width: 80%;
+        }
+
+        label {
+
+            display: block;
+            padding: 7px;
+        }
+
+        input {
+            width: 100%;
+            height: 45px;
+            padding-left: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>hello Spring mvc </h1>
 
-<form action="/checking" method="get">
-
-    <label>
-        <input name="token" type="text" value="12323435">
-    </label>
-    <label>
-        <input name="pass_word" type="text" value="NewPassword">
-    </label>
-
-
-    <button type="submit">submit post</button>
+<form action="/user" method="get">
+    <fieldset class="form-ctl">
+        <legend>用户登录</legend>
+        <div class="form-box">
+            <label>
+                <input name="token" type="text" value="12323435">
+            </label>
+            <label>
+                <input name="password" type="text" value="NewPassword">
+            </label>
+            <label>
+                <input type="submit" value="登录">
+            </label>
+        </div>
+    </fieldset>
 </form>
 <script>
     var xhr = new XMLHttpRequest();
