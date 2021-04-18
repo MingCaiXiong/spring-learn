@@ -21,4 +21,11 @@ public class URLMappingCaontroller {
       @RequestParam("foo") String username, @RequestParam("lorem") String passowrld) {
     return username + "\n" + passowrld;
   }
+
+  @GetMapping("/checking")
+  @ResponseBody
+  public String checking(Long token, @RequestParam("pass_word") String pass) {
+    Long token1 = token;
+    return token1 + ": " + pass;
+  }
 }

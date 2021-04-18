@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <base href="http://localhost:8080">
 </head>
 <body>
 <h1>hello Spring mvc </h1>
 
-<form action="/post" method="post">
+<form action="/checking" method="get">
+
+    <label>
+        <input name="token" type="text" value="12323435">
+    </label>
+    <label>
+        <input name="pass_word" type="text" value="NewPassword">
+    </label>
+
+
     <button type="submit">submit post</button>
 </form>
 <script>
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://localhost:8080/post', true);
+    xhr.open("POST", '/post', true);
 
     //发送合适的请求头信息
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
