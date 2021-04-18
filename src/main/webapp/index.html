@@ -6,5 +6,26 @@
 </head>
 <body>
 <h1>hello Spring mvc </h1>
+
+<form action="/post" method="post">
+    <button type="submit">submit post</button>
+</form>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://localhost:8080/post', true);
+
+    //发送合适的请求头信息
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function () {
+        // 请求结束后,在此处写处理代码
+    };
+    xhr.send("foo=bar&lorem=ipsum");
+    // xhr.send('string');
+    // xhr.send(new Blob());
+    // xhr.send(new Int8Array());
+    // xhr.send({ form: 'data' });
+    // xhr.send(document);
+</script>
 </body>
 </html>
