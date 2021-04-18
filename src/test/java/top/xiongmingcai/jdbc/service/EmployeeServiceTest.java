@@ -17,4 +17,9 @@ public class EmployeeServiceTest {
     public void batchAdd() {
         employeeService.batchAdd();
     }
+
+    @Test
+    public void testbatchDel() {
+        employeeService.batchDel();
+    }
 }
