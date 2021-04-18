@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--component-scan:在spring ioc初始化过程中，自动创建并管理top.xiongmingcai.springmvc及其子包中拥有以下注解的对象：
+    @Repository
+    @Service
+    @Component
+    @Controller
+    -->
+    <context:component-scan base-package="top.xiongmingcai.springmvc"/>
+    <!--启用spring mvc注解开发模式-->
+    <mvc:annotation-driven/>
+    <!--将图片/js/css等静态资源排除在外，提高执行效率-->
+    <mvc:default-servlet-handler/>
+</beans>
