@@ -1,10 +1,17 @@
 package top.xiongmingcai.jdbc.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import top.xiongmingcai.jdbc.dao.EmployeeDao;
 import top.xiongmingcai.jdbc.entity.Employee;
 
+import javax.annotation.Resource;
+
+@Service
+@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 public class BatchService {
-  private EmployeeDao employeeDao;
+  @Resource private EmployeeDao employeeDao;
 
   public EmployeeDao getEmployeeDao() {
     return employeeDao;
@@ -13,7 +20,7 @@ public class BatchService {
   public void setEmployeeDao(EmployeeDao employeeDao) {
     this.employeeDao = employeeDao;
   }
-
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
   public void importJob1() {
 
     for (int i = 1; i <= 10; i++) {
@@ -30,7 +37,7 @@ public class BatchService {
     }
     System.out.println("BatchService.importJob1");
   }
-
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
   public void importJob2() {
 
     for (int i = 1; i <= 10; i++) {

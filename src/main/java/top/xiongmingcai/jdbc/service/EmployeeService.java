@@ -1,14 +1,20 @@
 package top.xiongmingcai.jdbc.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import top.xiongmingcai.jdbc.dao.EmployeeDao;
 import top.xiongmingcai.jdbc.entity.Employee;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.ListIterator;
 
+@Service
+@Transactional
 public class EmployeeService {
-    private EmployeeDao employeeDao;
-    private BatchService batchService;
+  @Resource private EmployeeDao employeeDao;
+  @Resource private BatchService batchService;
 
     public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
@@ -17,13 +23,13 @@ public class EmployeeService {
     public void setBatchService(BatchService batchService) {
         this.batchService = batchService;
     }
-
+    @Transactional(propagation = Propagation.NOT_SUPPORTED , readOnly = true)
     public void batchAdd() {
         Employee employee = new Employee();
         for (int i = 1; i <= 10; i++) {
-//            if (i == 3) {
-//                throw new RuntimeException("意料之外的错误");
-//            }
+            if (i == 3) {
+                throw new RuntimeException("意料之外的错误");
+            }
             employee.setEname("employee" + i);
             employee.setSalary(4000);
             employee.setHiredate("2021-02-15");

@@ -2,8 +2,10 @@ package top.xiongmingcai.jdbc.dao;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 import top.xiongmingcai.jdbc.entity.Employee;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +16,9 @@ import java.util.Map;
  * @author makejava
  * @since 2021-04-17 10:47:57
  */
+@Repository
 public class EmployeeDao {
+    @Resource
     private JdbcTemplate  jdbcTemplate;
 
     public Employee findById(Integer eno) {
@@ -23,7 +27,7 @@ public class EmployeeDao {
                 new Object[]{eno},
                 new BeanPropertyRowMapper<Employee>(Employee.class));
         return employee;
-    };
+    }
 
     // 查询结果中多条记录转换为对应对象，我们可以使用query()进行查询，
     public List<Employee> queryByDname(String dname) {
