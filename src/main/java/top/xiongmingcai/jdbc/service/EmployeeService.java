@@ -8,11 +8,15 @@ import java.util.ListIterator;
 
 public class EmployeeService {
     private EmployeeDao employeeDao;
+    private BatchService batchService;
 
     public void setEmployeeDao(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
 
+    public void setBatchService(BatchService batchService) {
+        this.batchService = batchService;
+    }
 
     public void batchAdd() {
         Employee employee = new Employee();
@@ -41,5 +45,10 @@ public class EmployeeService {
            employeeDao.delete( next.getEno());
 
         }
+    }
+    public void startImportJob(){
+        batchService.importJob1();
+        batchService.importJob2();
+         System.out.println("批量导入成功!");
     }
 }

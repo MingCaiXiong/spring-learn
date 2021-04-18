@@ -28,9 +28,13 @@
     <bean class="top.xiongmingcai.jdbc.dao.EmployeeDao" id="employeeDao">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
-
+    <bean  class="top.xiongmingcai.jdbc.service.BatchService" id="batchService">
+        <property name="employeeDao" ref="employeeDao"/>
+    </bean>
     <bean class="top.xiongmingcai.jdbc.service.EmployeeService" id="employeeService">
         <property name="employeeDao" ref="employeeDao"/>
+        <property name="batchService" ref="batchService"/>
+
     </bean>
     <!--事务管理器:用于创建事务/提交/回滚-->
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
@@ -45,8 +49,13 @@
             <!--设置不使用事务-->
             <tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true"/>
             <tx:method name="get*" propagation="NOT_SUPPORTED" read-only="true"/>
+            
+            <tx:method name="importJob1" propagation="REQUIRED"/>
+            <tx:method name="importJob2" propagation="REQUIRED"/>
+<!--            <tx:method name="startImportJob" propagation="REQUIRED"/>-->
+            <tx:method name="*" propagation="REQUIRED"/>
             <!--其他情况-->
-            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true"/>
+<!--            <tx:method name="*" propagation="NOT_SUPPORTED" read-only="true"/>-->
         </tx:attributes>
     </tx:advice>
     <!--定义声明式事务的作用范围-->

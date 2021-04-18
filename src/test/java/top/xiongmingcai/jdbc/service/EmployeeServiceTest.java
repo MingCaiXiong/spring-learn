@@ -22,4 +22,9 @@ public class EmployeeServiceTest {
     public void testbatchDel() {
         employeeService.batchDel();
     }
+
+  @Test
+  public void startImportJob() {
+    employeeService.startImportJob();
+  }
 }
