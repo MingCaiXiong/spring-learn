@@ -3,6 +3,7 @@ package top.xiongmingcai.springmvc.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -16,7 +17,8 @@ public class URLMappingCaontroller {
 
   @PostMapping("/post")
   @ResponseBody
-  public String postMapping() {
-    return "this is post 方法";
+  public String postMapping(
+      @RequestParam("foo") String username, @RequestParam("lorem") String passowrld) {
+    return username + "\n" + passowrld;
   }
 }
