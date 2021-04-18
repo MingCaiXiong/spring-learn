@@ -2,5 +2,5 @@ target/
 .idea
 untitled8.iml
 
-out/
-out/*
+
+/out/
