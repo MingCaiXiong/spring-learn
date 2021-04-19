@@ -1,6 +1,7 @@
 package top.xiongmingcai.springmvc.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,5 +59,19 @@ public class URLMappingCaontroller {
     }
     mav.addObject("u", user);
     return mav;
+  }
+  //  http://localhost:8080/view2?userid=1
+  @GetMapping("/view2")
+  public String showView1(Integer userid, ModelMap modelMap) {
+    String view = "/view.jsp";
+
+    User user = new User();
+    if (userid == 1) {
+      user.setPassword("lily");
+    } else if (userid == 2) {
+      user.setPassword("andi");
+    }
+    modelMap.addAttribute("u", user);
+    return view;
   }
 }
