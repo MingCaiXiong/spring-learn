@@ -1,22 +1,25 @@
 package top.xiongmingcai.springmvc.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.xiongmingcai.springmvc.entity.Form;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class FormController {
-  //  @PostMapping("/apply")
+  @PostMapping("/apply")
   @ResponseBody
   public String apply(
       @RequestParam(value = "name", defaultValue = "ANON") String name,
       String course,
-      Integer[] purpose) {
+      Integer[] purpose,
+      @DateTimeFormat(pattern = "yyyy-MM-dd") Date time) {
     System.out.println(name);
     System.out.println(course);
     for (Integer p : purpose) {
@@ -47,7 +50,7 @@ public class FormController {
     return "SUCCESS";
   }
 
-  @PostMapping("/apply")
+  //  @PostMapping("/apply")
   @ResponseBody
   public String apply5(Form form) {
     System.out.println("form = " + form);

@@ -1,9 +1,15 @@
 package top.xiongmingcai.springmvc.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class IDcard {
   private String name;
   private String idno;
-  //  private Date expire;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private Date expire;
 
   public String getName() {
     return name;
@@ -21,11 +27,11 @@ public class IDcard {
     this.idno = idno;
   }
 
-  //  public Date getExpire() {
-  //    return expire;
-  //  }
-  //
-  //  public void setExpire(Date expire) {
-  //    this.expire = expire;
-  //  }
+  public Date getExpire() {
+    return expire;
+  }
+
+  public void setExpire(Date expire) {
+    this.expire = expire;
+  }
 }
