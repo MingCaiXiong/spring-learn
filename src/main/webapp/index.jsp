@@ -25,7 +25,7 @@
         })
     })
     $("#post").click(function () {
-        $.post("/restful/request", function (date) {
+        $.post("/restful/request/100", function (date) {
             console.log(arguments);
         })
     })
