@@ -19,13 +19,17 @@
 <button id="delete">delete</button>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    var data = {
+        name: "lily",
+        age: 23
+    }
     $("#get").click(function () {
         $.get("/restful/request", function (date) {
             console.log(arguments);
         })
     })
     $("#post").click(function () {
-        $.post("/restful/request/100", function (date) {
+        $.post("/restful/request/100", data, function (date) {
             console.log(arguments);
         })
     })
@@ -33,6 +37,7 @@
         $.ajax({
             url: '/restful/request',
             type: 'PUT',
+            data: data,
             success: function (result) {
                 // Do something with the result
             }

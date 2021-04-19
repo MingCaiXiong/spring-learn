@@ -15,5 +15,4 @@
     <mvc:annotation-driven/>
     <!--将图片/js/css等静态资源排除在外，提高执行效率-->
     <mvc:default-servlet-handler/>
-
 </beans>
