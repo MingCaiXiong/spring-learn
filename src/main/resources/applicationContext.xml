@@ -22,7 +22,7 @@
     <mvc:default-servlet-handler/>
 
     <!--启动Freemarker模板引擎-->
-    <bean id="ViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <!--设置相应输出，并解决中文乱码，客户端返回响应时，响应体所使用的字符集编码，是模板与数据渲染完成后-->
         <property name="contentType" value="text/html;charset=utf-8"/>
         <!--指定Freemarker模板文件拓展名-->
