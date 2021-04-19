@@ -16,7 +16,7 @@ public class FormController {
   @PostMapping("/apply")
   @ResponseBody
   public String apply(
-      @RequestParam(value = "name", defaultValue = "ANON") String name,
+      @RequestParam(value = "username", defaultValue = "ANON") String name,
       String course,
       Integer[] purpose,
       @DateTimeFormat(pattern = "yyyy-MM-dd") Date time) {

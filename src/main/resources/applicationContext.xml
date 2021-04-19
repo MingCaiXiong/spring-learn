@@ -17,7 +17,18 @@
     -->
     <context:component-scan base-package="top.xiongmingcai.springmvc"/>
     <!--启用spring mvc注解开发模式-->
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <!--解决响应体中文乱码问题-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <!--将图片/js/css等静态资源排除在外，提高执行效率-->
     <mvc:default-servlet-handler/>
 

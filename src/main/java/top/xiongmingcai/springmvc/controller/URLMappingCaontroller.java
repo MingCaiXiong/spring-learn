@@ -1,13 +1,17 @@
 package top.xiongmingcai.springmvc.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import top.xiongmingcai.springmvc.entity.User;
 
 import java.util.Date;
 
 @Controller
-@RequestMapping(produces = "text/html; charset=UTF-8")
+// @RequestMapping(produces = "text/html; charset=UTF-8")
 // @RequestMapping(value="/g",method = RequestMethod.GET)
 public class URLMappingCaontroller {
   @GetMapping("/g")
@@ -38,5 +42,21 @@ public class URLMappingCaontroller {
         + "<br>密码："
         + user.getPassword()
         + "</fieldset>";
+  }
+
+  @GetMapping("/view")
+  public ModelAndView showView(Integer userid) {
+    //    ModelAndView mav = new ModelAndView("/view.jsp");
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/view.jsp");
+
+    User user = new User();
+    if (userid == 1) {
+      user.setPassword("lily");
+    } else if (userid == 2) {
+      user.setPassword("andi");
+    }
+    mav.addObject("u", user);
+    return mav;
   }
 }
