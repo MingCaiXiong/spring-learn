@@ -9,9 +9,9 @@
             position: absolute;
             border: 1px solid #cccccc;
             left: 50%;
-            top: 50%;
+            top: 30%;
             width: 400px;
-            height: 300px;
+            /*height: 300px;*/
             margin-left: -200px;
             margin-top: -150px;
             box-sizing: border-box;
@@ -33,7 +33,7 @@
     <h2>学员调查问卷</h2>
     <form action="./apply" method="post">
         <h3>您的姓名</h3>
-        <input class="text" name="name" style="width: 150px">
+        <input class="text" name="username" style="width: 150px">
         <h3>您正在学习的技术方向</h3>
         <select name="course" style="width: 150px">
             <option value="java">Java</option>
@@ -48,11 +48,21 @@
             <input name="purpose" type="checkbox" value="3">兴趣爱好
             <input name="purpose" type="checkbox" value="4">其他
         </div>
+        <fieldset>
+            <legend>实名认证</legend>
+            <h3>姓名</h3>
+            <input class="text" name="idcard.name" style="width: 150px">
+            <h3>身份证</h3>
+            <input class="text" name="idcard.idno" style="width: 150px">
+            <h3>过期时间</h3>
+            <input class="text" name="idcard.expire" style="width: 150px">
+        </fieldset>
+
+
         <div style="text-align: center;padding-top:10px">
             <input style="width:100px" type="submit" value="提交">
         </div>
     </form>
-
 </div>
 </body>
 </html>

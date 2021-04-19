@@ -36,7 +36,7 @@ public class FormController {
     return "SUCCESS";
   }
 
-  //  @PostMapping("/apply")
+  //    @PostMapping("/apply")
   @ResponseBody
   public String apply4(String name, String course, @RequestParam List<Integer> purpose) {
     System.out.println(name);
@@ -47,14 +47,14 @@ public class FormController {
     return "SUCCESS";
   }
 
-  //  @PostMapping("/apply")
+  @PostMapping("/apply")
   @ResponseBody
   public String apply5(Form form) {
     System.out.println("form = " + form);
     return "SUCCESS";
   }
 
-  @PostMapping("/apply")
+  //  @PostMapping("/apply")
   @ResponseBody
   public String apply6(@RequestParam Map form) {
     System.out.println("form = " + form);

@@ -4,24 +4,25 @@ import java.util.List;
 
 public class Form {
 
-  private String name;
-  private String coures;
+  private String username;
+  private String course;
   private List<Integer> purpose;
+  private IDcard idcard = new IDcard();
 
-  public String getName() {
-    return name;
+  public String getUsername() {
+    return username;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
-  public String getCoures() {
-    return coures;
+  public String getCourse() {
+    return course;
   }
 
-  public void setCoures(String coures) {
-    this.coures = coures;
+  public void setCourse(String course) {
+    this.course = course;
   }
 
   public List<Integer> getPurpose() {
@@ -30,5 +31,13 @@ public class Form {
 
   public void setPurpose(List<Integer> purpose) {
     this.purpose = purpose;
+  }
+
+  public IDcard getIdcard() {
+    return idcard;
+  }
+
+  public void setIdcard(IDcard idcard) {
+    this.idcard = idcard;
   }
 }
