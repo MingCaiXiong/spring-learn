@@ -48,7 +48,7 @@ public class URLMappingCaontroller {
   public ModelAndView showView(Integer userid) {
     //    ModelAndView mav = new ModelAndView("/view.jsp");
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("/view.jsp");
+    mav.setViewName("redirect:/view.jsp");
 
     User user = new User();
     if (userid == 1) {
