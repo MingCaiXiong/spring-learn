@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import top.xiongmingcai.springmvc.entity.User;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping(produces = "text/html; charset=UTF-8")
 // @RequestMapping(value="/g",method = RequestMethod.GET)
@@ -20,12 +22,12 @@ public class URLMappingCaontroller {
       @RequestParam("foo") String username, @RequestParam("lorem") String passowrld) {
     return username + "\n" + passowrld;
   }
-
+  // http://localhost:8080/checking?token=12323435&pass_word=NewPassword&ctime=2020-03-09
   @GetMapping("/checking")
   @ResponseBody
-  public String checking(Long token, @RequestParam("pass_word") String pass) {
+  public String checking(Long token, @RequestParam("pass_word") String pass, Date ctime) {
     Long token1 = token;
-    return token1 + ": " + pass;
+    return token1 + ": " + pass + ": " + ctime;
   }
   // http://localhost:8080/user?token=12323435&password=NewPassword
   @GetMapping(value = "/user")
