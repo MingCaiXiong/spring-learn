@@ -17,7 +17,7 @@
 <button id="post">post</button>
 <button id="put">put</button>
 <button id="delete">delete</button>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="assets/jquery.js"></script>
 <script>
     var data = {
         name: "lily",

@@ -30,4 +30,13 @@
     <mvc:cors>
         <mvc:mapping path="/restful/**" allowed-origins="http://127.0.0.1:8080" max-age="3600"/>
     </mvc:cors>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截需要拦截的URL-->
+            <mvc:mapping path="/**"/>
+            <!--指明那个类对拦截的URL处理-->
+            <bean class="top.xiongmingcai.restful.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
