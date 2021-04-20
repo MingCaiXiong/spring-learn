@@ -34,9 +34,21 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <!--拦截需要拦截的URL-->
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/restful/**"/>
+            <!--静态资源不做拦截-->
+            <mvc:exclude-mapping path="/assets/**"/>
             <!--指明那个类对拦截的URL处理-->
             <bean class="top.xiongmingcai.restful.interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--拦截需要拦截的URL-->
+            <mvc:mapping path="/restful/**"/>
+            <!--静态资源不做拦截-->
+            <mvc:exclude-mapping path="/assets/**"/>
+            <!--指明那个类对拦截的URL处理-->
+            <bean class="top.xiongmingcai.restful.interceptor.MyInterceptor1"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>
