@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="console">
+        <encoder>
+            <pattern>[%thread] %d %level %logger{10} - %msg %n</pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="debug">
+        <appender-ref ref="console"/>
+    </root>
+
+<!---->
+    <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="accessHistoryLog">
+        <!--
+              通过rollingPolicy设置日志滚动的策略，这是使用按照时间滚动
+              fileNamePattern属性设置滚动生成文件的格式,这里设置的精确到天，也就是按照天滚动，如果时间设置精确到秒，就按秒来滚动
+              maxHistory属性设定最大的文件数，比如按天滚动，这里设置了30天，在第31天日志生成的时候，第一天的日志就会被删掉
+            -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy" name="accessHistoryLog">
+            <!--每日分割-->
+            <fileNamePattern>/Users/xmc/Downloads/logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--保留30天的历史记录-->
+            <maxHistory>30</maxHistory>
+            <!--最大存储-->
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <!--日志格式-->
+        <encoder>
+            <pattern>【logbck】%blue([requestId:%X{requestId:-syslogId}]) %d{yyyy-MM-dd HH:mm:ss.SSS} %red([%thread])
+                %5level - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="top.xiongmingcai.restful.interceptor.AccessHistoryInterceptor" level="INFO" additivity="false">
+        <appender-ref ref="accessHistoryLog"/>
+    </logger>
+</configuration>
