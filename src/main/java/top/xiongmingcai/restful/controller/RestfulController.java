@@ -10,23 +10,24 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/restful")
 public class RestfulController {
+  @CrossOrigin
   @GetMapping(value = "/request")
   public String doGetRequest() {
     return "{\"message\":\"数据获取成功\"}";
   }
-
+  @CrossOrigin(origins = {"http://127.0.0.1:8080"})
   @PostMapping(value = "/request/{rid}")
   public String doPostRequest(@PathVariable("rid") Integer requestId, Person person) {
     System.out.println(person.getName() + ": " + person.getAge());
     return "{\"message\":\"数据" + requestId + person.getName() + person.getAge() + "新增成功\"}";
   }
-
+  @CrossOrigin(origins = {"http://127.0.0.1:8080"},maxAge = 3600)
   @PutMapping(value = "/request")
   public String doPutRequest(Person person) {
     System.out.println(person.getName() + ": " + person.getAge());
     return "{\"message\":\"数据更新成功\"}";
   }
-
+  @CrossOrigin(origins = {"http://127.0.0.1:8080"},maxAge = 3600)
   @DeleteMapping(value = "/request")
   public String doDeleteRequest() {
     return "{\"message\":\"数据更新成功\"}";

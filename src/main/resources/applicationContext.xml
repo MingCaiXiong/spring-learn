@@ -26,4 +26,8 @@
     </mvc:annotation-driven>
     <!--将图片/js/css等静态资源排除在外，提高执行效率-->
     <mvc:default-servlet-handler/>
+    <!--跨域请求授权全局设置-->
+    <mvc:cors>
+        <mvc:mapping path="/restful/**" allowed-origins="http://127.0.0.1:8080" max-age="3600"/>
+    </mvc:cors>
 </beans>

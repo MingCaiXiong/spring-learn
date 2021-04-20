@@ -40,6 +40,7 @@
             data: data,
             success: function (result) {
                 // Do something with the result
+                console.log(arguments);
             }
         });
     })
@@ -49,6 +50,7 @@
             type: 'DELETE',
             success: function (result) {
                 // Do something with the result
+                console.log(arguments);
             }
         });
     })
