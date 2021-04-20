@@ -1,0 +1,14 @@
+html,body{
+    width: 100%;
+    height: 100%;
+
+}
+fieldset{
+
+    display: inline-block;
+}
+label,button{
+    padding: 5px;
+    width: 100%;
+    display: block;
+}

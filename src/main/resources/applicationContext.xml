@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mv="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:component-scan base-package="top.xiongmingcai.restful"/>
+    <!--启用spring mvc注解开发模式-->
+    <mvc:annotation-driven/>
+    <!--将图片/js/css等静态资源排除在外，提高执行效率-->
+    <mvc:default-servlet-handler/>
 
 
+    <!--启动Freemarker模板引擎-->
+    <bean id="ViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <!--设置相应输出，并解决中文乱码，客户端返回响应时，响应体所使用的字符集编码，是模板与数据渲染完成后-->
+        <property name="contentType" value="text/html;charset=utf-8"/>
+        <!--指定Freemarker模板文件拓展名-->
+        <property name="suffix" value=".ftl"/>
+    </bean>
+
+
+    <!--配置Freemarker参数-->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!--设置保存模板的目录-->
+        <property name="templateLoaderPath" value="/WEB-INF/freemarker"/>
+        <!--其他模板引擎设置-->
+        <property name="freemarkerSettings">
+            <props>
+                <!--设置Freemarker脚本与数据渲染时使用的字符集,模板与数据渲染的过程中-->
+                <prop key="defaultEncoding">UTF-8</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
