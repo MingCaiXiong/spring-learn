@@ -64,4 +64,26 @@
             <bean class="top.xiongmingcai.restful.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!--Spring与MyBatis整合配置-->
+    <bean class="com.alibaba.druid.pool.DruidDataSource" id="druidDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/imooc?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=GMT"/>
+        <property name="username" value="root"/>
+        <property name="password" value="NewPassword"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="20"/>
+    </bean>
+    <!--这个类是Spring 提供的,JdbcTemplate提供数据CURD的API-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
+        <property name="dataSource" ref="druidDataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configuration" value="classpath:mybatis-config.xml"/>
+    </bean>
+    <!--配置Mapper扫描器-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="top.xiongmingcai.restful.mapper"/>
+    </bean>
+
 </beans>
