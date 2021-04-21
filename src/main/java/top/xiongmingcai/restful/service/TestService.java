@@ -2,6 +2,7 @@ package top.xiongmingcai.restful.service;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.xiongmingcai.restful.dao.TestDao;
 
 import javax.annotation.Resource;
@@ -16,9 +17,12 @@ import javax.annotation.Resource;
 public class TestService {
     @Resource
     private TestDao testDao;
-
+    @Transactional
     public  void batchImport(){
         for (int i = 0; i < 10; i++) {
+            if (i ==3) {
+                throw  new RuntimeException("预期外异常!");
+            }
             testDao.insert();
         }
     }
