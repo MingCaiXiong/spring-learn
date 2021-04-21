@@ -9,7 +9,8 @@
         <!--applicationContext.xml-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:applicationContext.xml</param-value>
+            <!--applicationContext开头将会自动加载-->
+            <param-value>classpath:applicationContext*.xml</param-value>
         </init-param>
         <!--在web启动时自动创建spring ioc容器，并初始化dispatcherServlet-->
         <load-on-startup>0</load-on-startup>

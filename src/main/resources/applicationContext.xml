@@ -11,14 +11,28 @@
             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="top.xiongmingcai.restful"/>
     <!--启用spring mvc注解开发模式-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <!--解决响应体中文乱码问题-->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <!--不通过模板引擎直接产生的数据时生效-->
+                        <value>text/html;charset=utf-8</value>
+                        <!--不通过模板引擎直接产生JSON content type的数据时生效-->
+                        <value>application/json;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
     <!--将图片/js/css等静态资源排除在外，提高执行效率-->
     <mvc:default-servlet-handler/>
 
 
     <!--启动Freemarker模板引擎-->
-    <bean id="ViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <!--设置相应输出，并解决中文乱码，客户端返回响应时，响应体所使用的字符集编码，是模板与数据渲染完成后-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <!--Freemarker模板引擎产生HTML片段时生效-->
         <property name="contentType" value="text/html;charset=utf-8"/>
         <!--指定Freemarker模板文件拓展名-->
         <property name="suffix" value=".ftl"/>
@@ -32,7 +46,7 @@
         <!--其他模板引擎设置-->
         <property name="freemarkerSettings">
             <props>
-                <!--设置Freemarker脚本与数据渲染时使用的字符集,模板与数据渲染的过程中-->
+                <!--设置Freemarker脚本读取已UTF-8格式读取文件模板-->
                 <prop key="defaultEncoding">UTF-8</prop>
             </props>
         </property>

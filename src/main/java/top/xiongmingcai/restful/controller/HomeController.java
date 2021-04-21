@@ -1,5 +1,6 @@
 package top.xiongmingcai.restful.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,6 +61,11 @@ public class HomeController {
     @ResponseBody
     @GetMapping("/test")
     public String test() {
-        return "test ok 中文不乱码!";
+        return "ping test ok 中文不乱码!";
+    }
+    @ResponseBody
+    @GetMapping("/test2")
+    public String test2() {
+        return "{\"name\":\"萧炎\",\"work\":\"炼药师\"}";
     }
 }
