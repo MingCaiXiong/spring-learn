@@ -35,6 +35,8 @@
         .col- * {
             padding: 0px;
         }
+
+
     </style>
 
 </head>
@@ -109,7 +111,7 @@
                 <div class="mb-2 w-100">{{subTitle}}</div>
 
                 <p>
-                     <span class="stars" data-score="{{evaluationScore}}" title="gorgeous"></span>
+                    <span class="stars" data-score="{{evaluationScore}}" title="gorgeous"></span>
                     <span class="mt-2 ml-2">{{evaluationScore}}</span>
                     <span class="mt-2 ml-2">{{evaluationQuantity}}</span>
                 </p>
@@ -117,13 +119,14 @@
         </div>
     </a>
     <hr>
+    <!--bookItem {{bookId}}-->
 </script>
 <script>
-    $.fn.raty.defaults.path = "../../resources/raty/lib/images"
-    $(function () {
+
+    function loadMore(currentPage) {
         $.ajax({
             url: "/books",
-            data: {p: 1},
+            data: {p: currentPage},
             type: "get",
             dataType: "json",
             success: function (json) {
@@ -134,8 +137,37 @@
                     $("#bookList").append(html)
                 });
 
-                $(".stars").raty({readOnly:true})
+                $(".stars").raty({readOnly: true})
+                //判断是否为最一页
+                if (json.current < json.pages) {
+                    $("#nextPage").val(parseInt(json.current) + 1)
+                    $("#btnMore").show()
+                    $("#divNoMore").hide()
+                } else {
+                    $("#btnMore").hide()
+                    $("#divNoMore").show()
+                }
             }
+        })
+    }
+
+    $.fn.raty.defaults.path = "../../resources/raty/lib/images"
+    $(function () {
+        loadMore(1)
+    })
+
+    $(function () {
+        $("#btnMore").click(function () {
+            var nextPage = $("#nextPage").val();
+            loadMore(nextPage)
+        })
+        $(".category").click(function () {
+            $(".category").removeClass("highlight").addClass("text-black-50")
+            $(this).addClass("highlight")
+        })
+        $(".order").click(function () {
+            $(".order").removeClass("highlight").addClass("text-black-50")
+            $(this).addClass("highlight")
         })
     })
 </script>
