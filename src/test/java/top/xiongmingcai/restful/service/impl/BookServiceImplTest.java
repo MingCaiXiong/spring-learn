@@ -28,4 +28,14 @@ public class BookServiceImplTest {
         System.out.println("pages = " + paging.getPages());
         System.out.println("getTotal = " + paging.getTotal());
     }
+    @Test
+    public void paging2() {
+        IPage<Book> paging = bookService.paging(1L,"quantity",1, 10);
+        List<Book> records = paging.getRecords();
+        for (Book record : records) {
+            System.out.println("record = " + record);
+        }
+        System.out.println("pages = " + paging.getPages());
+        System.out.println("getTotal = " + paging.getTotal());
+    }
 }

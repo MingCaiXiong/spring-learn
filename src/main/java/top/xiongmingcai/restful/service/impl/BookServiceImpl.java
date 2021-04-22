@@ -25,4 +25,23 @@ public class BookServiceImpl implements BookService {
 
         return bookDao.selectPage(page1, new QueryWrapper<>());
     }
+
+    @Override
+    public IPage<Book> paging(Long categoryId, String order, Integer page, Integer rows) {
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        if (categoryId != null && categoryId != -1) {
+            queryWrapper.eq("category_id", categoryId);
+        }
+        if (order != null) {
+            if (order.equals("quantity")) {
+                queryWrapper.orderByDesc("evaluation_quantity");
+            } else if (order.equals("score")) {
+                queryWrapper.orderByDesc("evaluation_score");
+            }
+        }
+
+        IPage<Book> page1 = new Page<>(page, rows);
+
+        return bookDao.selectPage(page1, queryWrapper);
+    }
 }

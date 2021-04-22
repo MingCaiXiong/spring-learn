@@ -86,6 +86,7 @@
         <input type="hidden" id="nextPage" value="2">
         <input type="hidden" id="categoryId" value="-1">
         <input type="hidden" id="order" value="quantity">
+        <!--需要维护的状态-->
     </div>
 
     <div id="bookList">
@@ -123,10 +124,20 @@
 </script>
 <script>
 
-    function loadMore(currentPage) {
+    function loadMore(options) {
+        if (options.isReset === true) {
+            $("#bookList").empty()
+        }
+
+        var data = {
+            p: options.currentPage
+            , categoryId: $("#categoryId").val()
+            , order: $("#order").val()
+        }
+
         $.ajax({
             url: "/books",
-            data: {p: currentPage},
+            data: data,
             type: "get",
             dataType: "json",
             success: function (json) {
@@ -153,21 +164,35 @@
 
     $.fn.raty.defaults.path = "../../resources/raty/lib/images"
     $(function () {
-        loadMore(1)
+        loadMore({
+            currentPage: 1
+        })
     })
 
     $(function () {
         $("#btnMore").click(function () {
             var nextPage = $("#nextPage").val();
-            loadMore(nextPage)
+            loadMore({
+                currentPage: nextPage
+            })
         })
         $(".category").click(function () {
             $(".category").removeClass("highlight").addClass("text-black-50")
             $(this).addClass("highlight")
+            $("#categoryId").val($(this).data("category"))
+            loadMore({
+                currentPage: 1,
+                isReset: true
+            })
         })
         $(".order").click(function () {
             $(".order").removeClass("highlight").addClass("text-black-50")
             $(this).addClass("highlight")
+            $("#order").val($(this).data("order"))
+            loadMore({
+                currentPage: 1,
+                isReset: true
+            })
         })
     })
 </script>

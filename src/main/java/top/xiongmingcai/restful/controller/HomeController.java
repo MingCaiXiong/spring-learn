@@ -21,24 +21,27 @@ public class HomeController {
     private CategoryService categoryService;
     @Resource
     private BookService bookService;
+
     @GetMapping("/")
     public ModelAndView showHome() {
         ModelAndView mav = new ModelAndView("/index");
         List<Category> categoryList = categoryService.selectAll();
-        mav.addObject("categoryList",categoryList);
+        mav.addObject("categoryList", categoryList);
         return mav;
     }
+
     @GetMapping("/books")
     @ResponseBody
-    public IPage<Book> selectBook(@RequestParam(required = false,defaultValue = "1") Integer p){
-        return bookService.paging(p,10);
+    public IPage<Book> selectBook(@RequestParam(required = false, defaultValue = "-1") Long categoryId,
+                                  @RequestParam(required = false, defaultValue = "quantity") String order,
+                                  @RequestParam(required = false, defaultValue = "1") Integer p) {
+        return bookService.paging(categoryId, order, p, 10);
     }
-
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView doGetMapping(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("message",null);
+        session.setAttribute("message", null);
         return new ModelAndView("/login");
     }
 
@@ -53,15 +56,16 @@ public class HomeController {
             mav.addObject("u", user);
             return mav;
         } else {
-            session.setAttribute("message","用户名或密码错误,请重新登录!!");
+            session.setAttribute("message", "用户名或密码错误,请重新登录!!");
             return new ModelAndView("/login");
         }
 
     }
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView doGetLogoutMapping(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute("login_user",null);
+        session.setAttribute("login_user", null);
         return new ModelAndView("redirect:/login");
     }
 
@@ -78,6 +82,7 @@ public class HomeController {
     public String test() {
         return "ping test ok 中文不乱码!";
     }
+
     @ResponseBody
     @GetMapping("/test2")
     public String test2() {
