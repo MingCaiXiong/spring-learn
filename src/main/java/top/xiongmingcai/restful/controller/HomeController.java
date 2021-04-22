@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import top.xiongmingcai.restful.entity.Category;
 import top.xiongmingcai.restful.entity.User;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import top.xiongmingcai.restful.entity.Book;
+import top.xiongmingcai.restful.service.BookService;
 import top.xiongmingcai.restful.service.CategoryService;
 
 import javax.annotation.Resource;
@@ -16,12 +19,19 @@ import java.util.List;
 public class HomeController {
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private BookService bookService;
     @GetMapping("/")
     public ModelAndView showHome() {
-        ModelAndView mav = new ModelAndView("login-back");
+        ModelAndView mav = new ModelAndView("/index");
         List<Category> categoryList = categoryService.selectAll();
         mav.addObject("categoryList",categoryList);
         return mav;
+    }
+    @GetMapping("/books")
+    @ResponseBody
+    public IPage<Book> selectBook(@RequestParam(required = false,defaultValue = "1") Integer p){
+        return bookService.paging(p,10);
     }
 
 
