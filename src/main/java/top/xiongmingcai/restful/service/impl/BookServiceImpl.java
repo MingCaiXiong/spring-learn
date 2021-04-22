@@ -44,4 +44,9 @@ public class BookServiceImpl implements BookService {
 
         return bookDao.selectPage(page1, queryWrapper);
     }
+
+    @Override
+    public Book selectById(Long bookId) {
+        return bookDao.selectById(bookId);
+    }
 }

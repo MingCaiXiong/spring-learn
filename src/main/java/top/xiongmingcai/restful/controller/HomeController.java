@@ -30,6 +30,12 @@ public class HomeController {
         return mav;
     }
 
+    /**
+     * @param categoryId 分类ID 默认全部
+     * @param order  排序默认 按热度
+     * @param p 第几页
+     * @return  分页接口实现类
+     */
     @GetMapping("/books")
     @ResponseBody
     public IPage<Book> selectBook(@RequestParam(required = false, defaultValue = "-1") Long categoryId,
@@ -37,6 +43,15 @@ public class HomeController {
                                   @RequestParam(required = false, defaultValue = "1") Integer p) {
         return bookService.paging(categoryId, order, p, 10);
     }
+
+    @GetMapping("/book/{id}")
+    public ModelAndView showDetail(@PathVariable("id")Long id) {
+        Book book = bookService.selectById(id);
+        ModelAndView mav = new ModelAndView("/detail");
+        mav.addObject("book", book);
+        return mav;
+    }
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView doGetMapping(HttpServletRequest request) {
