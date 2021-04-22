@@ -1,21 +1,26 @@
 package top.xiongmingcai.restful.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import top.xiongmingcai.restful.entity.Category;
 import top.xiongmingcai.restful.entity.User;
+import top.xiongmingcai.restful.service.CategoryService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class HomeController {
-
-    @GetMapping("/index")
+    @Resource
+    private CategoryService categoryService;
+    @GetMapping("/")
     public ModelAndView showHome() {
-        ModelAndView mav = new ModelAndView("/index");
-
+        ModelAndView mav = new ModelAndView("login-back");
+        List<Category> categoryList = categoryService.selectAll();
+        mav.addObject("categoryList",categoryList);
         return mav;
     }
 
