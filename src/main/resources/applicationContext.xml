@@ -66,6 +66,7 @@
             <mvc:mapping path="/**"/>
             <!--静态资源不做拦截-->
             <mvc:exclude-mapping path="/assets/**"/>
+            <mvc:exclude-mapping path="/resources/**"/>
             <mvc:exclude-mapping path="/login*"/>
             <!--指明那个类对拦截的URL处理-->
             <bean class="top.xiongmingcai.restful.interceptor.LoginInterceptor"/>
@@ -83,7 +84,8 @@
         <property name="maxActive" value="20"/>
     </bean>
     <!--这个类是Spring 提供的,JdbcTemplate提供数据CURD的API-->
-    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
+<!--    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">-->
+    <bean class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean" id="sessionFactory">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
