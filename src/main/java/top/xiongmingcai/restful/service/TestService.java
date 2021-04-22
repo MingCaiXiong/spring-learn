@@ -20,10 +20,10 @@ public class TestService {
     @Transactional
     public  void batchImport(){
         for (int i = 0; i < 10; i++) {
-            if (i ==3) {
-                throw  new RuntimeException("预期外异常!");
-            }
-            testDao.insert();
+//            if (i ==3) {
+//                throw  new RuntimeException("预期外异常!");
+//            }
+            testDao.insetSample();
         }
     }
 
