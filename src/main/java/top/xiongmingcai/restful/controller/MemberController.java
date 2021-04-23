@@ -5,13 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import top.xiongmingcai.restful.exception.BussinessException;
+import top.xiongmingcai.restful.service.MemberService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class MemberController {
+    @Resource
+    private MemberService memberService;
+
     @GetMapping("/register")//register
     public ModelAndView showReigster() {
         return new ModelAndView("/register");
@@ -26,8 +32,15 @@ public class MemberController {
             result.put("code", "VC01");
             result.put("msg", "验证码错误");
         } else {
-            result.put("code", "0");
-            result.put("msg", "success");
+            try {
+                memberService.createMember(username, password, nickname);
+                result.put("code", "0");
+                result.put("msg", "success");
+            } catch (BussinessException ex) {
+                ex.printStackTrace();
+                result.put("code", ex.getCode());
+                result.put("msg", ex.getMsg());
+            }
         }
         return result;
     }
