@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +57,7 @@
         <ul class="nav">
             <li class="nav-item">
                 <a href="/">
-                    <img src="https://m.imooc.com/static/wap/static/common/img/logo2.png"  class="mt-1"
+                    <img src="https://m.imooc.com/static/wap/static/common/img/logo2.png" class="mt-1"
                          style="width: 100px">
                 </a>
             </li>
@@ -116,25 +115,25 @@
     </div>
     <div class="reply pl-2 pr-2">
         <#list evaluations as evaluation>
-        <div>
             <div>
-                <span class="pt-1 small text-black-50 mr-2">${evaluation.createTime?string("yy-MM-dd")}</span>
-                <span class="mr-2 small pt-1">慕粉-126</span>
-                <span class="stars mr-2" data-score="${evaluation.score}"></span>
+                <div>
+                    <span class="pt-1 small text-black-50 mr-2">${evaluation.createTime?string("yy-MM-dd")}</span>
+                    <span class="mr-2 small pt-1">${evaluation.member.nickname}</span>
+                    <span class="stars mr-2" data-score="${evaluation.score}"></span>
 
-                <button type="button" data-evaluation-id="41"
-                        class="btn btn-success btn-sm text-white float-right" style="margin-top: -3px;">
-                    <img style="width: 24px;margin-top: -5px;" class="mr-1"
-                         src="https://img3.doubanio.com/f/talion/7a0756b3b6e67b59ea88653bc0cfa14f61ff219d/pics/card/ic_like_gray.svg"/>
-                    <span>${evaluation.enjoy}</span>
-                </button>
-            </div>
+                    <button type="button" data-evaluation-id="41"
+                            class="btn btn-success btn-sm text-white float-right" style="margin-top: -3px;">
+                        <img style="width: 24px;margin-top: -5px;" class="mr-1"
+                             src="https://img3.doubanio.com/f/talion/7a0756b3b6e67b59ea88653bc0cfa14f61ff219d/pics/card/ic_like_gray.svg"/>
+                        <span>${evaluation.enjoy}</span>
+                    </button>
+                </div>
 
-            <div class="row mt-2 small mb-3">
-               ${evaluation.content}
+                <div class="row mt-2 small mb-3">
+                    ${evaluation.content}
+                </div>
+                <hr/>
             </div>
-            <hr/>
-        </div>
         </#list>
     </div>
 </div>

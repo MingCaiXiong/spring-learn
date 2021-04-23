@@ -1,11 +1,12 @@
 package top.xiongmingcai.restful.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (Evaluation)实体类
@@ -17,46 +18,51 @@ import java.io.Serializable;
 public class Evaluation implements Serializable {
     private static final long serialVersionUID = 142987063756868852L;
     /**
-    * 评价编号
-    */
+     * 评价编号
+     */
     @TableId(type = IdType.AUTO)
     private Long evaluationId;
     /**
-    * 短评内容
-    */
+     * 短评内容
+     */
     private String content;
     /**
-    * 评分-5分制
-    */
+     * 评分-5分制
+     */
     private Integer score;
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date createTime;
     /**
-    * 会员编号
-    */
+     * 会员编号
+     */
     private Long memberId;
     /**
-    * 图书编号
-    */
+     * 图书编号
+     */
     private Long bookId;
     /**
-    * 点赞数量
-    */
+     * 点赞数量
+     */
     private Integer enjoy;
     /**
-    * 审核状态 enable-有效 disable-已禁用
-    */
+     * 审核状态 enable-有效 disable-已禁用
+     */
     private String state;
     /**
-    * 禁用理由
-    */
+     * 禁用理由
+     */
     private String disableReason;
     /**
-    * 禁用时间
-    */
+     * 禁用时间
+     */
     private Date disableTime;
+    //说明Book 没有对应字段,不会参与sql中evaluation 自动生成
+    @TableField(exist = false)
+    private Book book;
+    @TableField(exist = false)
+    private Member member;
 
 
     public static long getSerialVersionUID() {
@@ -141,5 +147,21 @@ public class Evaluation implements Serializable {
 
     public void setDisableTime(Date disableTime) {
         this.disableTime = disableTime;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
     }
 }
