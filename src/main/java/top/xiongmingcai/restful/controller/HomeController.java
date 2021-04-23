@@ -1,13 +1,12 @@
 package top.xiongmingcai.restful.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import top.xiongmingcai.restful.entity.Book;
 import top.xiongmingcai.restful.entity.Category;
 import top.xiongmingcai.restful.entity.Evaluation;
-import top.xiongmingcai.restful.entity.User;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import top.xiongmingcai.restful.entity.Book;
 import top.xiongmingcai.restful.service.BookService;
 import top.xiongmingcai.restful.service.CategoryService;
 import top.xiongmingcai.restful.service.EvaluationService;
@@ -36,9 +35,9 @@ public class HomeController {
 
     /**
      * @param categoryId 分类ID 默认全部
-     * @param order  排序默认 按热度
-     * @param p 第几页
-     * @return  分页接口实现类
+     * @param order      排序默认 按热度
+     * @param p          第几页
+     * @return 分页接口实现类
      */
     @GetMapping("/books")
     @ResponseBody
@@ -49,7 +48,7 @@ public class HomeController {
     }
 
     @GetMapping("/book/{id}")
-    public ModelAndView showDetail(@PathVariable("id")Long id) {
+    public ModelAndView showDetail(@PathVariable("id") Long id) {
         Book book = bookService.selectById(id);
         List<Evaluation> evaluations = evaluationService.queryAllByBookId(id);
         ModelAndView mav = new ModelAndView("/detail");
@@ -66,22 +65,6 @@ public class HomeController {
         return new ModelAndView("/login");
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView doPostMapping(HttpServletRequest request, User user) {
-        System.out.println(user);
-        HttpSession session = request.getSession();
-        if (user.getName().equals("admin") && user.getPassword().equals("admin")) {
-            ModelAndView mav = new ModelAndView("redirect:/main");
-            session.setAttribute("login_user", user.getName());
-            mav.addObject("u", user);
-            return mav;
-        } else {
-            session.setAttribute("message", "用户名或密码错误,请重新登录!!");
-            return new ModelAndView("/login");
-        }
-
-    }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView doGetLogoutMapping(HttpServletRequest request) {

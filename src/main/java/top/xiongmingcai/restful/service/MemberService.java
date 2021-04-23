@@ -11,4 +11,10 @@ import top.xiongmingcai.restful.entity.Member;
 public interface MemberService {
     Member createMember(String username, String password, String nickName);
 
+    /**
+     * @param username 用户名
+     * @param password 密码
+     * @return 登录对象
+     */
+    Member checkLogin(String username, String password);
 }

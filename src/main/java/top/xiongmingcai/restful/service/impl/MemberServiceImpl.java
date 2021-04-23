@@ -43,6 +43,24 @@ public class MemberServiceImpl implements MemberService {
         member.setSalt(salt);
         member.setCreateTime(new Date());
         memberDao.insert(member);
-        return null;
+        return member;
     }
+
+    @Override
+    public Member checkLogin(String username, String password) {
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        Member member = memberDao.selectOne(queryWrapper);
+        if (member == null) {
+            throw new BussinessException("M02", "用户名不存在");
+        }
+        String md5 = MD5Utils.md5Digest(password, member.getSalt());
+
+        if (!md5.equals(member.getPassword())) {
+            throw new BussinessException("M03", "用户名不存在或密码输入错误");
+        }
+        return member;
+    }
+
+
 }
