@@ -4,11 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import top.xiongmingcai.restful.entity.Category;
+import top.xiongmingcai.restful.entity.Evaluation;
 import top.xiongmingcai.restful.entity.User;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import top.xiongmingcai.restful.entity.Book;
 import top.xiongmingcai.restful.service.BookService;
 import top.xiongmingcai.restful.service.CategoryService;
+import top.xiongmingcai.restful.service.EvaluationService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,8 @@ public class HomeController {
     private CategoryService categoryService;
     @Resource
     private BookService bookService;
+    @Resource
+    private EvaluationService evaluationService;
 
     @GetMapping("/")
     public ModelAndView showHome() {
@@ -47,8 +51,10 @@ public class HomeController {
     @GetMapping("/book/{id}")
     public ModelAndView showDetail(@PathVariable("id")Long id) {
         Book book = bookService.selectById(id);
+        List<Evaluation> evaluations = evaluationService.queryAllByBookId(id);
         ModelAndView mav = new ModelAndView("/detail");
         mav.addObject("book", book);
+        mav.addObject("evaluations", evaluations);
         return mav;
     }
 
