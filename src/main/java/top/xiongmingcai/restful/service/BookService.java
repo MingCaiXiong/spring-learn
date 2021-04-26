@@ -21,4 +21,6 @@ public interface BookService {
      * 更新图书评分和评价数量
      */
     void updateEvaluationScoreAndQuantity();
+
+    Book createBook(Book book);
 }

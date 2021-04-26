@@ -58,4 +58,11 @@ public class BookServiceImpl implements BookService {
     public void updateEvaluationScoreAndQuantity() {
         bookDao.updateEvaluationScoreAndQuantity();
     }
+
+    @Override
+    @Transactional
+    public Book createBook(Book book) {
+        bookDao.insert(book);
+        return book;
+    }
 }
