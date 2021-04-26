@@ -17,4 +17,8 @@ public interface BookService {
 
     Book selectById(Long bookId);
 
+    /**
+     * 更新图书评分和评价数量
+     */
+    void updateEvaluationScoreAndQuantity();
 }

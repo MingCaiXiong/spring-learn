@@ -49,4 +49,13 @@ public class BookServiceImpl implements BookService {
     public Book selectById(Long bookId) {
         return bookDao.selectById(bookId);
     }
+
+    /**
+     * 更新图书评分和评价数量
+     */
+    @Override
+    @Transactional
+    public void updateEvaluationScoreAndQuantity() {
+        bookDao.updateEvaluationScoreAndQuantity();
+    }
 }

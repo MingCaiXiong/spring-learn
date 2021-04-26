@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.xiongmingcai.restful.dao.BookDao">
 
+    <update id="updateEvaluationScoreAndQuantity">
+        update book as superior
+        set evaluation_score    =(
+            select ifnull(AVG(score), 0)
+            from evaluation
+            where book_id = superior.book_id
+              and state = 'enable'
+        ),
+            evaluation_quantity =(
+                select ifnull(COUNT(score), 0)
+                from evaluation
+                where book_id = superior.book_id
+                  and state = 'enable'
+            )
+    </update>
 </mapper>
