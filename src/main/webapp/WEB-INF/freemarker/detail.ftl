@@ -48,6 +48,11 @@
         $(function () {
             $(".stars").raty({readOnly: true});
         })
+        $(function () {
+            <#if memberReadState??>
+            $("*[data-read-state=${memberReadState.readState}]").addClass("highlight")
+            </#if>
+        })
     </script>
 </head>
 <body>

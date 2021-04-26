@@ -4,12 +4,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import top.xiongmingcai.restful.entity.Book;
-import top.xiongmingcai.restful.entity.Category;
-import top.xiongmingcai.restful.entity.Evaluation;
+import top.xiongmingcai.restful.entity.*;
 import top.xiongmingcai.restful.service.BookService;
 import top.xiongmingcai.restful.service.CategoryService;
 import top.xiongmingcai.restful.service.EvaluationService;
+import top.xiongmingcai.restful.service.MemberReadStateService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +23,8 @@ public class HomeController {
     private BookService bookService;
     @Resource
     private EvaluationService evaluationService;
+    @Resource
+    private MemberReadStateService memberReadStateService;
 
     @GetMapping("/")
     public ModelAndView showHome() {
@@ -48,10 +49,16 @@ public class HomeController {
     }
 
     @GetMapping("/book/{id}")
-    public ModelAndView showDetail(@PathVariable("id") Long id) {
+    public ModelAndView showDetail(@PathVariable("id") Long id, HttpSession session) {
         Book book = bookService.selectById(id);
         List<Evaluation> evaluations = evaluationService.queryAllByBookId(id);
         ModelAndView mav = new ModelAndView("/detail");
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        if (loginMember != null) {
+            MemberReadState memberReadState = memberReadStateService.selectMemberReadState(loginMember.getMemberId(), id);
+            mav.addObject("memberReadState", memberReadState);
+        }
         mav.addObject("book", book);
         mav.addObject("evaluations", evaluations);
         return mav;
