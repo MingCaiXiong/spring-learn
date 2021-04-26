@@ -52,6 +52,30 @@
             <#if memberReadState??>
             $("*[data-read-state=${memberReadState.readState}]").addClass("highlight")
             </#if>
+            <#if loginMember??>
+            $("*[data-read-state]").click(function () {
+
+                var readState = $(this).data("read-state");
+                var data = {
+                    readState: readState,
+                    memberId: ${loginMember.memberId},
+                    bookid: ${book.bookId}
+
+                }
+                console.info(data);
+                $.post("/update_read_state", data, function (json) {
+                    console.info(arguments);
+                    if (json.code == "0") {
+                        $("button[date-read-state]").removeClass("highlight")
+                        $("button[date-read-state='" + readState + "']").addClass("highlight")
+                    }
+                }, "json")
+            })
+            <#else >
+            $("*[data-read-state], #btnEvaluation, *[data-evaluation-id]").click(function () {
+                $("#exampleModalCenter").modal("show")
+            })
+            </#if>
         })
     </script>
 </head>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import top.xiongmingcai.restful.entity.Member;
 import top.xiongmingcai.restful.exception.BussinessException;
+import top.xiongmingcai.restful.service.MemberReadStateService;
 import top.xiongmingcai.restful.service.MemberService;
 
 import javax.annotation.Resource;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class MemberController {
     @Resource
     private MemberService memberService;
+    @Resource
+    private MemberReadStateService memberReadStateService;
 
     @GetMapping("/register")//register
     public ModelAndView showReigster() {
@@ -48,7 +51,7 @@ public class MemberController {
     }
 
     @ResponseBody
-    @PostMapping("check_login")
+    @PostMapping("/check_login")
     public Map checkLogin(String username, String password, String vc, HttpSession session) {
         String verifyCode = (String) session.getAttribute("verifyCode");
         HashMap<String, Object> result = new HashMap<>();
@@ -68,5 +71,22 @@ public class MemberController {
             }
         }
         return result;
+    }
+
+    @ResponseBody
+    @PostMapping("/update_read_state")
+    public Map updateReadState(Long memberId, Long bookid, Integer readState) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            memberReadStateService.updateMermberReadState(memberId, bookid, readState);
+            result.put("code", "0");
+            result.put("msg", "success");
+        } catch (BussinessException ex) {
+            ex.printStackTrace();
+            result.put("code", ex.getCode());
+            result.put("msg", ex.getMsg());
+        }
+        return result;
+
     }
 }

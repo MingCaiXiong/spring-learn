@@ -2,6 +2,7 @@ package top.xiongmingcai.restful.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import top.xiongmingcai.restful.dao.MemberDao;
 import top.xiongmingcai.restful.entity.Member;
@@ -47,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public Member checkLogin(String username, String password) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);

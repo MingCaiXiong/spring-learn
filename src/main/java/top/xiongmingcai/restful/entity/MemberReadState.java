@@ -1,5 +1,9 @@
 package top.xiongmingcai.restful.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,11 +13,13 @@ import java.util.Date;
  * @author makejava
  * @since 2021-04-26 08:53:21
  */
+@TableName("member_read_state")
 public class MemberReadState implements Serializable {
     private static final long serialVersionUID = -21138660904007562L;
     /**
      * 会员阅读状态
      */
+    @TableId(type = IdType.AUTO)
     private Long rsId;
     /**
      * 图书编号
@@ -32,6 +38,9 @@ public class MemberReadState implements Serializable {
      */
     private Date createTime;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Long getRsId() {
         return rsId;
@@ -72,5 +81,4 @@ public class MemberReadState implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
 }
