@@ -49,4 +49,13 @@ public class EvaluationServiceImpl implements EvaluationService {
         }
         return evaluations;
     }
+
+    @Override
+    public Evaluation enjoy(Long evaluationId) {
+
+        Evaluation evaluation = evaluationDao.selectById(evaluationId);
+        evaluation.setEnjoy(evaluation.getEnjoy() + 1);
+        evaluationDao.updateById(evaluation);
+        return evaluation;
+    }
 }

@@ -94,6 +94,18 @@
                     }
                 }, "json")
             })
+            //评论点赞
+            $("*[data-evaluation-id]").click(function () {
+                var id = $(this).data("evaluation-id");
+                var children = $(this).children("span");
+
+                $.post('/enjoy', {evaluationId: id}, function (json) {
+                    console.log(json);
+                    if (json.code == 0) {
+                        $(children).text(json.evaluation.enjoy)
+                    }
+                })
+            })
             <#else >
             $("*[data-read-state], #btnEvaluation, *[data-evaluation-id]").click(function () {
                 $("#exampleModalCenter").modal("show")
@@ -173,7 +185,7 @@
                     <span class="mr-2 small pt-1">${evaluation.member.nickname}</span>
                     <span class="stars mr-2" data-score="${evaluation.score}"></span>
 
-                    <button type="button" data-evaluation-id="41"
+                    <button type="button" data-evaluation-id="${evaluation.evaluationId?c}"
                             class="btn btn-success btn-sm text-white float-right" style="margin-top: -3px;">
                         <img style="width: 24px;margin-top: -5px;" class="mr-1"
                              src="https://img3.doubanio.com/f/talion/7a0756b3b6e67b59ea88653bc0cfa14f61ff219d/pics/card/ic_like_gray.svg"/>

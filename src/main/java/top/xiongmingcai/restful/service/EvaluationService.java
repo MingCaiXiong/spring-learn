@@ -1,6 +1,7 @@
 package top.xiongmingcai.restful.service;
 
 import top.xiongmingcai.restful.entity.Evaluation;
+
 import java.util.List;
 
 /**
@@ -13,4 +14,5 @@ public interface EvaluationService {
 
     List<Evaluation> queryAllByBookId(Long bookId);
 
+    Evaluation enjoy(Long evaluationId);
 }

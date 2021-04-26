@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import top.xiongmingcai.restful.entity.Evaluation;
 import top.xiongmingcai.restful.entity.Member;
 import top.xiongmingcai.restful.exception.BussinessException;
+import top.xiongmingcai.restful.service.EvaluationService;
 import top.xiongmingcai.restful.service.MemberReadStateService;
 import top.xiongmingcai.restful.service.MemberService;
 
@@ -22,6 +24,8 @@ public class MemberController {
     private MemberService memberService;
     @Resource
     private MemberReadStateService memberReadStateService;
+    @Resource
+    private EvaluationService evaluationService;
 
     @GetMapping("/register")//register
     public ModelAndView showReigster() {
@@ -98,6 +102,28 @@ public class MemberController {
             memberService.evaluate(memberId, bookid, score, content);
             result.put("code", "0");
             result.put("msg", "success");
+        } catch (BussinessException ex) {
+            ex.printStackTrace();
+            result.put("code", ex.getCode());
+            result.put("msg", ex.getMsg());
+        }
+        return result;
+
+    }
+
+    @ResponseBody
+    @PostMapping("/enjoy")
+    public Map enjoy(Long evaluationId) {
+        HashMap<String, Object> result = new HashMap<>();
+        if (evaluationId == null) {
+            result.put("code", "E01");
+            result.put("msg", "参数缺省");
+        }
+        try {
+            Evaluation evaluation = evaluationService.enjoy(evaluationId);
+            result.put("code", "0");
+            result.put("msg", "success");
+            result.put("enaluation", evaluation);
         } catch (BussinessException ex) {
             ex.printStackTrace();
             result.put("code", ex.getCode());
