@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import top.xiongmingcai.restful.dao.EvaluationDao;
 import top.xiongmingcai.restful.dao.MemberDao;
+import top.xiongmingcai.restful.entity.Evaluation;
 import top.xiongmingcai.restful.entity.Member;
 import top.xiongmingcai.restful.exception.BussinessException;
 import top.xiongmingcai.restful.service.MemberService;
@@ -26,6 +28,8 @@ import java.util.Random;
 public class MemberServiceImpl implements MemberService {
     @Resource
     private MemberDao memberDao;
+    @Resource
+    private EvaluationDao evaluationDao;
 
     @Override
     public Member createMember(String username, String password, String nickName) {
@@ -62,6 +66,29 @@ public class MemberServiceImpl implements MemberService {
             throw new BussinessException("M03", "用户名不存在或密码输入错误");
         }
         return member;
+    }
+
+    /**
+     * 发布新的短评
+     *
+     * @param memberId
+     * @param bookId
+     * @param score    评分
+     * @param content  短评内容
+     * @return
+     */
+    @Override
+    public Evaluation evaluate(Long memberId, Long bookId, Integer score, String content) {
+        Evaluation evaluation = new Evaluation();
+        evaluation.setMemberId(memberId);
+        evaluation.setBookId(bookId);
+        evaluation.setScore(score);
+        evaluation.setContent(content);
+        evaluation.setCreateTime(new Date());
+        evaluation.setState("enable");
+        evaluation.setEnjoy(0);
+        evaluationDao.insert(evaluation);
+        return null;
     }
 
 

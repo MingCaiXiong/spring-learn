@@ -54,7 +54,7 @@
             </#if>
             <#if loginMember??>
             $("*[data-read-state]").click(function () {
-
+                $("*[data-read-state]").removeClass("highlight")
                 var readState = $(this).data("read-state");
                 var data = {
                     readState: readState,
@@ -66,8 +66,31 @@
                 $.post("/update_read_state", data, function (json) {
                     console.info(arguments);
                     if (json.code == "0") {
-                        $("button[date-read-state]").removeClass("highlight")
-                        $("button[date-read-state='" + readState + "']").addClass("highlight")
+                        $("*[data-read-state=" + readState + "]").addClass("highlight")
+                    }
+                    console.log(readState);
+                }, "json")
+            })
+
+            $("#btnEvaluation").click(function () {
+                $("#score").raty()
+
+                $("#dlgEvaluation").modal("show")
+            })
+            $("#btnSubmit").click(function () {
+                var score = $("#score").raty("score")
+                var content = $("#content").val();
+                if (score == 0 || $.trim(content) == "") {
+                    return;
+                }
+                $.post("/evaluate", {
+                    score: score,
+                    memberId: ${loginMember.memberId},
+                    bookid: ${book.bookId},
+                    content: content
+                }, function (json) {
+                    if (json.code == 0) {
+                        window.location.reload()
                     }
                 }, "json")
             })
@@ -189,7 +212,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <h6>为"从 0 开始学爬虫"写短评</h6>
+                <h6>为"${book.bookName}"写短评</h6>
                 <form id="frmEvaluation">
                     <div class="input-group  mt-2 ">
                         <span id="score"></span>

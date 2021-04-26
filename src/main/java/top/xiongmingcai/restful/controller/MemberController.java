@@ -89,4 +89,22 @@ public class MemberController {
         return result;
 
     }
+
+    @ResponseBody
+    @PostMapping("/evaluate")
+    public Map updateReadState(Long memberId, Long bookid, Integer score, String content) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            memberService.evaluate(memberId, bookid, score, content);
+            result.put("code", "0");
+            result.put("msg", "success");
+        } catch (BussinessException ex) {
+            ex.printStackTrace();
+            result.put("code", ex.getCode());
+            result.put("msg", ex.getMsg());
+        }
+        return result;
+
+    }
+
 }

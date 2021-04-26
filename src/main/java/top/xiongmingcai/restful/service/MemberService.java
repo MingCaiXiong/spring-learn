@@ -1,5 +1,6 @@
 package top.xiongmingcai.restful.service;
 
+import top.xiongmingcai.restful.entity.Evaluation;
 import top.xiongmingcai.restful.entity.Member;
 
 /**
@@ -17,4 +18,13 @@ public interface MemberService {
      * @return 登录对象
      */
     Member checkLogin(String username, String password);
+
+    /**
+     * @param memberid
+     * @param bookId
+     * @param score    评分
+     * @param content  短评内容
+     * @return
+     */
+    Evaluation evaluate(Long memberid, Long bookId, Integer score, String content);
 }
