@@ -1,5 +1,6 @@
 package top.xiongmingcai.restful.controller.admin;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,7 +26,7 @@ public class MBookController {
     @Resource
     private BookService bookService;
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public ModelAndView showBook() {
         return new ModelAndView("/admin/book");
     }
@@ -71,6 +72,20 @@ public class MBookController {
             result.put("msg", ex.getMsg());
         }
 
+        return result;
+    }
+
+    @GetMapping("/list")
+    @ResponseBody
+    public Map list(@RequestParam(required = false, defaultValue = "1") Integer page,
+                    @RequestParam(required = false, defaultValue = "10") Integer limit) {
+
+        IPage<Book> paging = bookService.paging(page, limit);
+        HashMap<Object, Object> result = new HashMap<>();
+        result.put("code", "0");
+        result.put("msg", "success");
+        result.put("data", paging.getRecords());
+        result.put("count", paging.getTotal());
         return result;
     }
 }

@@ -122,7 +122,7 @@
                 <p>
                     <span class="stars" data-score="{{evaluationScore}}" title="gorgeous"></span>
                     <span class="mt-2 ml-2">{{evaluationScore}}</span>
-                    <span class="mt-2 ml-2">{{evaluationQuantity}}</span>
+                    <span class="mt-2 ml-2">{{evaluationQuantity}}人已评</span>
                 </p>
             </div>
         </div>
