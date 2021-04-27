@@ -15,6 +15,7 @@ import top.xiongmingcai.restful.entity.Member;
 import top.xiongmingcai.restful.service.EvaluationService;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,4 +79,21 @@ public class EvaluationServiceImpl implements EvaluationService {
 
         return evaluationIPage;
     }
+
+    /**
+     * @param evaluation_id
+     * @param disableReason 禁用理由
+     * @return
+     */
+    @Override
+    public Evaluation disable(Long evaluation_id, String disableReason) {
+        Evaluation evaluation = evaluationDao.selectById(evaluation_id);
+        evaluation.setState("disable");
+        evaluation.setDisableReason(disableReason);
+        evaluation.setDisableTime(new Date());
+        evaluationDao.updateById(evaluation);
+        return evaluation;
+    }
+
+
 }

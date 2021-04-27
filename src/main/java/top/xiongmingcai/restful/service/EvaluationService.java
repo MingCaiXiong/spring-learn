@@ -18,4 +18,11 @@ public interface EvaluationService {
     Evaluation enjoy(Long evaluationId);
 
     IPage<Evaluation> paging(Integer page, Integer rows);
+
+    /**
+     * @param evaluation_id
+     * @param disableReason 禁用理由
+     * @return
+     */
+    Evaluation disable(Long evaluation_id, String disableReason);
 }
