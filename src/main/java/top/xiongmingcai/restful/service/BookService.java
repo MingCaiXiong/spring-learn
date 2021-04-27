@@ -23,4 +23,6 @@ public interface BookService {
     void updateEvaluationScoreAndQuantity();
 
     Book createBook(Book book);
+
+    Book updateBook(Book book);
 }

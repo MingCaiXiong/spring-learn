@@ -88,4 +88,49 @@ public class MBookController {
         result.put("count", paging.getTotal());
         return result;
     }
+
+    @ResponseBody
+    @GetMapping("/id/{id}")
+    public Map selectById(@PathVariable("id") Long bookId) {
+        Book book = bookService.selectById(bookId);
+        HashMap<Object, Object> result = new HashMap<>();
+        result.put("code", "0");
+        result.put("msg", "success");
+        result.put("data", book);
+        return result;
+    }
+
+
+    @ResponseBody
+    @PostMapping("/update")
+    public Map updateById(Book book) {
+        HashMap<Object, Object> result = new HashMap<>();
+        Book resultBook;
+
+        try {
+            Book rawBook = bookService.selectById(book.getBookId());
+
+            Document document = Jsoup.parse(book.getDescription());
+            Element img = document.select("img").first();
+            String cover = img.attr("src");
+
+            rawBook.setCover(cover);
+            rawBook.setBookName(book.getBookName());
+            rawBook.setSubTitle(book.getSubTitle());
+            rawBook.setAuthor(book.getAuthor());
+            rawBook.setCategoryId(book.getCategoryId());
+            rawBook.setDescription(book.getDescription());
+
+            resultBook = bookService.updateBook(rawBook);
+            result.put("code", "0");
+            result.put("msg", "success");
+            result.put("data", resultBook);
+
+        } catch (BussinessException ex) {
+            ex.printStackTrace();
+            result.put("code", ex.getCode());
+            result.put("msg", ex.getMsg());
+        }
+        return result;
+    }
 }

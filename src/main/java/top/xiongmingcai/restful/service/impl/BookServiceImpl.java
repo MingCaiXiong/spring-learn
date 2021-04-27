@@ -65,4 +65,11 @@ public class BookServiceImpl implements BookService {
         bookDao.insert(book);
         return book;
     }
+
+    @Override
+    @Transactional
+    public Book updateBook(Book book) {
+        bookDao.updateById(book);
+        return book;
+    }
 }
