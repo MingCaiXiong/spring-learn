@@ -38,6 +38,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public IPage<Book> paging(String author, Integer page, Integer rows) {
+
+        IPage<Book> page1 = new Page<>(page, rows);
+        QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("author", author);
+        return bookDao.selectPage(page1, queryWrapper);
+    }
+
+    @Override
     public IPage<Book> paging(Long categoryId, String order, Integer page, Integer rows) {
         QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
         if (categoryId != null && categoryId != -1) {

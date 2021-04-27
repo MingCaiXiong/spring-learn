@@ -14,9 +14,15 @@
 
 
     <script type="text/html" id="toolbar">
-        <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" id="btnAdd" onclick="showCreate()">添加</button>
+        <div class="layui-btn-container layui-inline">
+            <button class="layui-btn " id="btnAdd" onclick="showCreate()">添加</button>
+
         </div>
+        <div class="layui-input-inline">
+            <input name="search_author" class="layui-input" placeholder="请输入作者">
+            <!--该文本框只允许输入数字-->
+        </div>
+        <button class="layui-btn" title="" onclick="searchAuthor()">搜索</button>
     </script>
 
 </head>
@@ -85,26 +91,38 @@
     var table = layui.table; //table数据表格对象
     var $ = layui.$; //jQuery
     var editor = null; //wangEditor富文本编辑器对象
-    //初始化图书列表
-    table.render({
-        elem: '#grdBook'  //指定div
-        , id: "bookList" //数据表格id
-        , toolbar: "#toolbar" //指定工具栏,包含新增添加
-        , url: "/management/book/list" //数据接口
-        , page: true //开启分页
-        , cols: [[ //表头
-            {field: 'bookName', title: '书名', width: '300'}
-            , {field: 'subTitle', title: '子标题', width: '200'}
-            , {field: 'author', title: '作者', width: '200'}
-            , {
-                type: 'space', title: '操作', width: '200', templet: function (d) {
-                    //为每一行表格数据生成"修改"与"删除"按钮,并附加data-id属性代表图书编号
-                    return "<button class='layui-btn layui-btn-sm btn-update'  data-id='" + d.bookId + "' data-type='update' onclick='showUpdate(this)'>修改</button>" +
-                        "<button class='layui-btn layui-btn-sm btn-delete'  data-id='" + d.bookId + "'   onclick='showDelete(this)'>删除</button>";
+    function tableInit(options) {
+        //初始化图书列表
+        table.render({
+            elem: '#grdBook'  //指定div
+            , id: "bookList" //数据表格id
+            , toolbar: "#toolbar" //指定工具栏,包含新增添加
+            , url: options.url  //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'bookName', title: '书名', width: '300'}
+                , {field: 'subTitle', title: '子标题', width: '200'}
+                , {field: 'author', title: '作者', width: '200'}
+                , {
+                    type: 'space', title: '操作', width: '200', templet: function (d) {
+                        //为每一行表格数据生成"修改"与"删除"按钮,并附加data-id属性代表图书编号
+                        return "<button class='layui-btn layui-btn-sm btn-update'  data-id='" + d.bookId + "' data-type='update' onclick='showUpdate(this)'>修改</button>" +
+                            "<button class='layui-btn layui-btn-sm btn-delete'  data-id='" + d.bookId + "'   onclick='showDelete(this)'>删除</button>";
+                    }
                 }
-            }
-        ]]
-    });
+            ]]
+        });
+    }
+
+    $(function () {
+        tableInit({url: "/management/book/list"})
+    })
+
+    function searchAuthor() {
+        var author = $("input[name=search_author]").val();
+        tableInit({url: "/management/book/list?author=" + $.trim(author)})
+    }
+
     //显示更新图书对话框
     //obj对应点击的"修改"按钮对象
     function showUpdate(obj) {
@@ -161,7 +179,8 @@
         layui.form.render(); //LayUI表单重新
         $("#dlgBook #optype").val("create");//设置当前表单提交时提交至"create"新增地址
 
-    };
+    }
+
 
     //对话框表单提交
     layui.form.on('submit(btnSubmit)', function (data) {

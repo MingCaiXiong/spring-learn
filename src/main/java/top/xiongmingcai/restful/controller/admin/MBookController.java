@@ -78,14 +78,22 @@ public class MBookController {
     @GetMapping("/list")
     @ResponseBody
     public Map list(@RequestParam(required = false, defaultValue = "1") Integer page,
-                    @RequestParam(required = false, defaultValue = "10") Integer limit) {
+                    @RequestParam(required = false, defaultValue = "10") Integer limit, String author) {
+        Map<Object, Object> result = new HashMap<>();
+        if (author == null) {
+            IPage<Book> paging = bookService.paging(page, limit);
+            result.put("code", "0");
+            result.put("msg", "success");
+            result.put("data", paging.getRecords());
+            result.put("count", paging.getTotal());
 
-        IPage<Book> paging = bookService.paging(page, limit);
-        HashMap<Object, Object> result = new HashMap<>();
-        result.put("code", "0");
-        result.put("msg", "success");
-        result.put("data", paging.getRecords());
-        result.put("count", paging.getTotal());
+        } else {
+            IPage<Book> paging = bookService.paging(author, page, limit);
+            result.put("code", "0");
+            result.put("msg", "success");
+            result.put("data", paging.getRecords());
+            result.put("count", paging.getTotal());
+        }
         return result;
     }
 

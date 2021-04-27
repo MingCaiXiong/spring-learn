@@ -13,6 +13,8 @@ import top.xiongmingcai.restful.entity.Book;
 public interface BookService {
     public IPage<Book> paging(Integer page, Integer rows);
 
+    public IPage<Book> paging(String author, Integer page, Integer rows);
+
     public IPage<Book> paging(Long categoryId, String order, Integer page, Integer rows);
 
     Book selectById(Long bookId);
