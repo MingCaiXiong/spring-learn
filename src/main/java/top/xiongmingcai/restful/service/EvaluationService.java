@@ -1,5 +1,6 @@
 package top.xiongmingcai.restful.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import top.xiongmingcai.restful.entity.Evaluation;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface EvaluationService {
     List<Evaluation> queryAllByBookId(Long bookId);
 
     Evaluation enjoy(Long evaluationId);
+
+    IPage<Evaluation> paging(Integer page, Integer rows);
 }

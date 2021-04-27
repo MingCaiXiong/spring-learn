@@ -1,6 +1,8 @@
 package top.xiongmingcai.restful.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,5 +59,23 @@ public class EvaluationServiceImpl implements EvaluationService {
         evaluation.setEnjoy(evaluation.getEnjoy() + 1);
         evaluationDao.updateById(evaluation);
         return evaluation;
+    }
+
+    @Override
+    public IPage<Evaluation> paging(Integer page, Integer rows) {
+
+        IPage<Evaluation> page1 = new Page<>(page, rows);
+
+        IPage<Evaluation> evaluationIPage = evaluationDao.selectPage(page1, new QueryWrapper<>());
+        List<Evaluation> evaluationList = evaluationIPage.getRecords();
+        for (Evaluation evaluation : evaluationList) {
+            Book book = bookDao.selectById(evaluation.getBookId());
+            Member member = memberDao.selectById(evaluation.getMemberId());
+
+            evaluation.setBook(book);
+            evaluation.setMember(member);
+        }
+
+        return evaluationIPage;
     }
 }
